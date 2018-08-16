@@ -1,0 +1,19 @@
+{
+  "name": "@engr/ic-scripts-rewired-server",
+  "version": "0.0.0",
+  "description": "add rewired webpack config to serevr",
+  "target": "node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "admin",
+  "license": "ISC",
+  "dependencies": {
+    "@engr/ic-scripts-util": "^0.0.0",
+    "cross-env": "^5.2.0",
+    "cross-spawn": "^6.0.5",
+    "detect-port": "^1.2.3",
+    "react-dev-utils": "^5.0.1"
+  }
+}

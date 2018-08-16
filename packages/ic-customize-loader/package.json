@@ -1,0 +1,20 @@
+{
+  "name": "@engr/ic-customize-loader",
+  "version": "0.0.0",
+  "description": "处理定制的postcss插件和webpack loader",
+  "target": "node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "admin",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-traverse": "^6.26.0",
+    "babylon": "^6.18.0",
+    "loader-utils": "^1.1.0",
+    "postcss": "^7.0.2",
+    "postcss-value-parser": "^3.3.0"
+  }
+}

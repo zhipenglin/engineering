@@ -1,0 +1,581 @@
+0 silly input []
+1 silly flags { _: [ 'bootstrap' ],
+1 silly flags   'reject-cycles': false,
+1 silly flags   rejectCycles: false,
+1 silly flags   args: [] }
+2 verbose rootPath /Users/linzhipeng/Documents/project/engineering
+3 info version 2.11.0
+4 silly existsSync /Users/linzhipeng/Documents/project/engineering/VERSION
+5 silly initialize attempt
+6 silly npmConfig { registry: undefined,
+6 silly npmConfig   npmClient: undefined,
+6 silly npmConfig   npmClientArgs: undefined,
+6 silly npmConfig   mutex: undefined }
+7 silly initialize success
+8 silly execute attempt
+9 info Bootstrapping 8 packages
+10 info lifecycle preinstall
+11 silly runScript preinstall @engr/ic-customize-config
+12 silly @engr/ic-customize-config
+13 silly runScript preinstall @engr/ic-customize-loader
+14 silly @engr/ic-customize-loader
+15 silly runScript preinstall @engr/ic-scripts-rewired-aliases
+16 silly @engr/ic-scripts-rewired-aliases
+17 silly runScript preinstall @engr/ic-scripts-util
+18 silly @engr/ic-scripts-util
+19 silly runScript preinstall @engr/ic-scripts-rewired-customize
+20 silly @engr/ic-scripts-rewired-customize
+21 silly runScript preinstall @engr/ic-scripts-rewired-sass
+22 silly @engr/ic-scripts-rewired-sass
+23 silly runScript preinstall @engr/ic-scripts-rewired-server
+24 silly @engr/ic-scripts-rewired-server
+25 silly runScript preinstall @engr/ic-scripts
+26 silly @engr/ic-scripts
+27 silly hasMatchingDependency @engr/ic-scripts-rewired-customize @engr/ic-customize-config
+28 silly hasMatchingDependency @engr/ic-scripts-rewired-customize @engr/ic-scripts-util
+29 silly hasMatchingDependency @engr/ic-scripts-rewired-sass @engr/ic-scripts-util
+30 silly hasMatchingDependency @engr/ic-scripts-rewired-server @engr/ic-scripts-util
+31 silly hasMatchingDependency @engr/ic-scripts @engr/ic-customize-config
+32 silly hasMatchingDependency @engr/ic-scripts @engr/ic-scripts-util
+33 silly hasDependencyInstalled @engr/ic-customize-config chalk
+34 silly dependencyIsSatisfied [ 'chalk',
+34 silly dependencyIsSatisfied   '^2.4.1',
+34 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-customize-config/node_modules' ]
+35 verbose dependencyIsSatisfied chalk true
+36 silly hasDependencyInstalled @engr/ic-scripts chalk
+37 silly dependencyIsSatisfied [ 'chalk',
+37 silly dependencyIsSatisfied   '1.1.3',
+37 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+38 verbose dependencyIsSatisfied chalk true
+39 silly hasDependencyInstalled @engr/ic-customize-config load-json-file
+40 silly dependencyIsSatisfied [ 'load-json-file',
+40 silly dependencyIsSatisfied   '^5.0.0',
+40 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-customize-config/node_modules' ]
+41 verbose dependencyIsSatisfied load-json-file true
+42 silly hasDependencyInstalled @engr/ic-customize-config lodash
+43 silly dependencyIsSatisfied [ 'lodash',
+43 silly dependencyIsSatisfied   '^4.17.10',
+43 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-customize-config/node_modules' ]
+44 verbose dependencyIsSatisfied lodash true
+45 silly hasDependencyInstalled @engr/ic-customize-loader babel-core
+46 silly dependencyIsSatisfied [ 'babel-core',
+46 silly dependencyIsSatisfied   '^6.26.0',
+46 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-customize-loader/node_modules' ]
+47 verbose dependencyIsSatisfied babel-core true
+48 silly hasDependencyInstalled @engr/ic-scripts babel-core
+49 silly dependencyIsSatisfied [ 'babel-core',
+49 silly dependencyIsSatisfied   '6.26.0',
+49 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+50 verbose dependencyIsSatisfied babel-core true
+51 silly hasDependencyInstalled @engr/ic-customize-loader babel-traverse
+52 silly dependencyIsSatisfied [ 'babel-traverse',
+52 silly dependencyIsSatisfied   '^6.26.0',
+52 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-customize-loader/node_modules' ]
+53 verbose dependencyIsSatisfied babel-traverse true
+54 silly hasDependencyInstalled @engr/ic-customize-loader babylon
+55 silly dependencyIsSatisfied [ 'babylon',
+55 silly dependencyIsSatisfied   '^6.18.0',
+55 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-customize-loader/node_modules' ]
+56 verbose dependencyIsSatisfied babylon true
+57 silly hasDependencyInstalled @engr/ic-customize-loader loader-utils
+58 silly dependencyIsSatisfied [ 'loader-utils',
+58 silly dependencyIsSatisfied   '^1.1.0',
+58 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-customize-loader/node_modules' ]
+59 verbose dependencyIsSatisfied loader-utils true
+60 silly hasDependencyInstalled @engr/ic-scripts-rewired-customize @engr/ic-customize-loader
+61 silly dependencyIsSatisfied [ '@engr/ic-customize-loader',
+61 silly dependencyIsSatisfied   '^1.2.0',
+61 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts-rewired-customize/node_modules' ]
+62 verbose dependencyIsSatisfied @engr/ic-customize-loader false
+63 silly hasDependencyInstalled @engr/ic-scripts-rewired-sass node-sass
+64 silly dependencyIsSatisfied [ 'node-sass',
+64 silly dependencyIsSatisfied   '^4.9.2',
+64 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts-rewired-sass/node_modules' ]
+65 verbose dependencyIsSatisfied node-sass true
+66 silly hasDependencyInstalled @engr/ic-scripts-rewired-sass sass-loader
+67 silly dependencyIsSatisfied [ 'sass-loader',
+67 silly dependencyIsSatisfied   '^7.0.3',
+67 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts-rewired-sass/node_modules' ]
+68 verbose dependencyIsSatisfied sass-loader true
+69 silly hasDependencyInstalled @engr/ic-scripts-rewired-server cross-env
+70 silly dependencyIsSatisfied [ 'cross-env',
+70 silly dependencyIsSatisfied   '^5.2.0',
+70 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts-rewired-server/node_modules' ]
+71 verbose dependencyIsSatisfied cross-env true
+72 silly hasDependencyInstalled @engr/ic-scripts cross-env
+73 silly dependencyIsSatisfied [ 'cross-env',
+73 silly dependencyIsSatisfied   '^5.2.0',
+73 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+74 verbose dependencyIsSatisfied cross-env true
+75 silly hasDependencyInstalled @engr/ic-scripts-rewired-server cross-spawn
+76 silly dependencyIsSatisfied [ 'cross-spawn',
+76 silly dependencyIsSatisfied   '^6.0.5',
+76 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts-rewired-server/node_modules' ]
+77 verbose dependencyIsSatisfied cross-spawn true
+78 silly hasDependencyInstalled @engr/ic-scripts cross-spawn
+79 silly dependencyIsSatisfied [ 'cross-spawn',
+79 silly dependencyIsSatisfied   '^6.0.5',
+79 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+80 verbose dependencyIsSatisfied cross-spawn true
+81 silly hasDependencyInstalled @engr/ic-scripts-rewired-server detect-port
+82 silly dependencyIsSatisfied [ 'detect-port',
+82 silly dependencyIsSatisfied   '^1.2.3',
+82 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts-rewired-server/node_modules' ]
+83 verbose dependencyIsSatisfied detect-port true
+84 silly hasDependencyInstalled @engr/ic-scripts-rewired-server react-dev-utils
+85 silly dependencyIsSatisfied [ 'react-dev-utils',
+85 silly dependencyIsSatisfied   '^5.0.1',
+85 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts-rewired-server/node_modules' ]
+86 verbose dependencyIsSatisfied react-dev-utils true
+87 silly hasDependencyInstalled @engr/ic-scripts react-dev-utils
+88 silly dependencyIsSatisfied [ 'react-dev-utils',
+88 silly dependencyIsSatisfied   '^5.0.1',
+88 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+89 verbose dependencyIsSatisfied react-dev-utils true
+90 silly hasDependencyInstalled @engr/ic-scripts autoprefixer
+91 silly dependencyIsSatisfied [ 'autoprefixer',
+91 silly dependencyIsSatisfied   '7.1.6',
+91 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+92 verbose dependencyIsSatisfied autoprefixer true
+93 silly hasDependencyInstalled @engr/ic-scripts babel-eslint
+94 silly dependencyIsSatisfied [ 'babel-eslint',
+94 silly dependencyIsSatisfied   '7.2.3',
+94 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+95 verbose dependencyIsSatisfied babel-eslint true
+96 silly hasDependencyInstalled @engr/ic-scripts babel-jest
+97 silly dependencyIsSatisfied [ 'babel-jest',
+97 silly dependencyIsSatisfied   '20.0.3',
+97 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+98 verbose dependencyIsSatisfied babel-jest true
+99 silly hasDependencyInstalled @engr/ic-scripts babel-loader
+100 silly dependencyIsSatisfied [ 'babel-loader',
+100 silly dependencyIsSatisfied   '7.1.2',
+100 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+101 verbose dependencyIsSatisfied babel-loader true
+102 silly hasDependencyInstalled @engr/ic-scripts babel-preset-react-app
+103 silly dependencyIsSatisfied [ 'babel-preset-react-app',
+103 silly dependencyIsSatisfied   '^3.1.1',
+103 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+104 verbose dependencyIsSatisfied babel-preset-react-app true
+105 silly hasDependencyInstalled @engr/ic-scripts babel-runtime
+106 silly dependencyIsSatisfied [ 'babel-runtime',
+106 silly dependencyIsSatisfied   '6.26.0',
+106 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+107 verbose dependencyIsSatisfied babel-runtime true
+108 silly hasDependencyInstalled @engr/ic-scripts case-sensitive-paths-webpack-plugin
+109 silly dependencyIsSatisfied [ 'case-sensitive-paths-webpack-plugin',
+109 silly dependencyIsSatisfied   '2.1.1',
+109 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+110 verbose dependencyIsSatisfied case-sensitive-paths-webpack-plugin true
+111 silly hasDependencyInstalled @engr/ic-scripts css-loader
+112 silly dependencyIsSatisfied [ 'css-loader',
+112 silly dependencyIsSatisfied   '0.28.7',
+112 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+113 verbose dependencyIsSatisfied css-loader true
+114 silly hasDependencyInstalled @engr/ic-scripts dotenv
+115 silly dependencyIsSatisfied [ 'dotenv',
+115 silly dependencyIsSatisfied   '4.0.0',
+115 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+116 verbose dependencyIsSatisfied dotenv true
+117 silly hasDependencyInstalled @engr/ic-scripts dotenv-expand
+118 silly dependencyIsSatisfied [ 'dotenv-expand',
+118 silly dependencyIsSatisfied   '4.2.0',
+118 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+119 verbose dependencyIsSatisfied dotenv-expand true
+120 silly hasDependencyInstalled @engr/ic-scripts eslint
+121 silly dependencyIsSatisfied [ 'eslint',
+121 silly dependencyIsSatisfied   '4.10.0',
+121 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+122 verbose dependencyIsSatisfied eslint true
+123 silly hasDependencyInstalled @engr/ic-scripts eslint-config-react-app
+124 silly dependencyIsSatisfied [ 'eslint-config-react-app',
+124 silly dependencyIsSatisfied   '^2.1.0',
+124 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+125 verbose dependencyIsSatisfied eslint-config-react-app true
+126 silly hasDependencyInstalled @engr/ic-scripts eslint-loader
+127 silly dependencyIsSatisfied [ 'eslint-loader',
+127 silly dependencyIsSatisfied   '1.9.0',
+127 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+128 verbose dependencyIsSatisfied eslint-loader true
+129 silly hasDependencyInstalled @engr/ic-scripts eslint-plugin-flowtype
+130 silly dependencyIsSatisfied [ 'eslint-plugin-flowtype',
+130 silly dependencyIsSatisfied   '2.39.1',
+130 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+131 verbose dependencyIsSatisfied eslint-plugin-flowtype true
+132 silly hasDependencyInstalled @engr/ic-scripts eslint-plugin-import
+133 silly dependencyIsSatisfied [ 'eslint-plugin-import',
+133 silly dependencyIsSatisfied   '2.8.0',
+133 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+134 verbose dependencyIsSatisfied eslint-plugin-import true
+135 silly hasDependencyInstalled @engr/ic-scripts eslint-plugin-jsx-a11y
+136 silly dependencyIsSatisfied [ 'eslint-plugin-jsx-a11y',
+136 silly dependencyIsSatisfied   '5.1.1',
+136 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+137 verbose dependencyIsSatisfied eslint-plugin-jsx-a11y true
+138 silly hasDependencyInstalled @engr/ic-scripts eslint-plugin-react
+139 silly dependencyIsSatisfied [ 'eslint-plugin-react',
+139 silly dependencyIsSatisfied   '7.4.0',
+139 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+140 verbose dependencyIsSatisfied eslint-plugin-react true
+141 silly hasDependencyInstalled @engr/ic-scripts extract-text-webpack-plugin
+142 silly dependencyIsSatisfied [ 'extract-text-webpack-plugin',
+142 silly dependencyIsSatisfied   '3.0.2',
+142 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+143 verbose dependencyIsSatisfied extract-text-webpack-plugin true
+144 silly hasDependencyInstalled @engr/ic-scripts file-loader
+145 silly dependencyIsSatisfied [ 'file-loader',
+145 silly dependencyIsSatisfied   '1.1.5',
+145 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+146 verbose dependencyIsSatisfied file-loader true
+147 silly hasDependencyInstalled @engr/ic-scripts fs-extra
+148 silly dependencyIsSatisfied [ 'fs-extra',
+148 silly dependencyIsSatisfied   '3.0.1',
+148 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+149 verbose dependencyIsSatisfied fs-extra true
+150 silly hasDependencyInstalled @engr/ic-scripts fsevents
+151 silly dependencyIsSatisfied [ 'fsevents',
+151 silly dependencyIsSatisfied   '^1.1.3',
+151 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+152 verbose dependencyIsSatisfied fsevents true
+153 silly hasDependencyInstalled @engr/ic-scripts html-webpack-plugin
+154 silly dependencyIsSatisfied [ 'html-webpack-plugin',
+154 silly dependencyIsSatisfied   '2.29.0',
+154 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+155 verbose dependencyIsSatisfied html-webpack-plugin true
+156 silly hasDependencyInstalled @engr/ic-scripts jest
+157 silly dependencyIsSatisfied [ 'jest',
+157 silly dependencyIsSatisfied   '20.0.4',
+157 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+158 verbose dependencyIsSatisfied jest true
+159 silly hasDependencyInstalled @engr/ic-scripts object-assign
+160 silly dependencyIsSatisfied [ 'object-assign',
+160 silly dependencyIsSatisfied   '4.1.1',
+160 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+161 verbose dependencyIsSatisfied object-assign true
+162 silly hasDependencyInstalled @engr/ic-scripts postcss-flexbugs-fixes
+163 silly dependencyIsSatisfied [ 'postcss-flexbugs-fixes',
+163 silly dependencyIsSatisfied   '3.2.0',
+163 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+164 verbose dependencyIsSatisfied postcss-flexbugs-fixes true
+165 silly hasDependencyInstalled @engr/ic-scripts postcss-loader
+166 silly dependencyIsSatisfied [ 'postcss-loader',
+166 silly dependencyIsSatisfied   '2.0.8',
+166 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+167 verbose dependencyIsSatisfied postcss-loader true
+168 silly hasDependencyInstalled @engr/ic-scripts promise
+169 silly dependencyIsSatisfied [ 'promise',
+169 silly dependencyIsSatisfied   '8.0.1',
+169 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+170 verbose dependencyIsSatisfied promise true
+171 silly hasDependencyInstalled @engr/ic-scripts raf
+172 silly dependencyIsSatisfied [ 'raf',
+172 silly dependencyIsSatisfied   '3.4.0',
+172 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+173 verbose dependencyIsSatisfied raf true
+174 silly hasDependencyInstalled @engr/ic-scripts resolve
+175 silly dependencyIsSatisfied [ 'resolve',
+175 silly dependencyIsSatisfied   '1.6.0',
+175 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+176 verbose dependencyIsSatisfied resolve true
+177 silly hasDependencyInstalled @engr/ic-scripts style-loader
+178 silly dependencyIsSatisfied [ 'style-loader',
+178 silly dependencyIsSatisfied   '0.19.0',
+178 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+179 verbose dependencyIsSatisfied style-loader true
+180 silly hasDependencyInstalled @engr/ic-scripts sw-precache-webpack-plugin
+181 silly dependencyIsSatisfied [ 'sw-precache-webpack-plugin',
+181 silly dependencyIsSatisfied   '0.11.4',
+181 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+182 verbose dependencyIsSatisfied sw-precache-webpack-plugin true
+183 silly hasDependencyInstalled @engr/ic-scripts url-loader
+184 silly dependencyIsSatisfied [ 'url-loader',
+184 silly dependencyIsSatisfied   '0.6.2',
+184 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+185 verbose dependencyIsSatisfied url-loader true
+186 silly hasDependencyInstalled @engr/ic-scripts webpack
+187 silly dependencyIsSatisfied [ 'webpack',
+187 silly dependencyIsSatisfied   '3.8.1',
+187 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+188 verbose dependencyIsSatisfied webpack true
+189 silly hasDependencyInstalled @engr/ic-scripts webpack-dev-server
+190 silly dependencyIsSatisfied [ 'webpack-dev-server',
+190 silly dependencyIsSatisfied   '2.9.4',
+190 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+191 verbose dependencyIsSatisfied webpack-dev-server true
+192 silly hasDependencyInstalled @engr/ic-scripts webpack-manifest-plugin
+193 silly dependencyIsSatisfied [ 'webpack-manifest-plugin',
+193 silly dependencyIsSatisfied   '1.3.2',
+193 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+194 verbose dependencyIsSatisfied webpack-manifest-plugin true
+195 silly hasDependencyInstalled @engr/ic-scripts whatwg-fetch
+196 silly dependencyIsSatisfied [ 'whatwg-fetch',
+196 silly dependencyIsSatisfied   '2.0.3',
+196 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+197 verbose dependencyIsSatisfied whatwg-fetch true
+198 silly hasDependencyInstalled @engr/ic-scripts yargs
+199 silly dependencyIsSatisfied [ 'yargs',
+199 silly dependencyIsSatisfied   '^12.0.1',
+199 silly dependencyIsSatisfied   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts/node_modules' ]
+200 verbose dependencyIsSatisfied yargs true
+201 silly root dependencies []
+202 silly leaf dependencies {
+202 silly leaf dependencies   "@engr/ic-customize-config": [
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "chalk@^2.4.1",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "load-json-file@^5.0.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "lodash@^4.17.10",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     }
+202 silly leaf dependencies   ],
+202 silly leaf dependencies   "@engr/ic-scripts": [
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "chalk@1.1.3",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "babel-core@6.26.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "cross-env@^5.2.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "cross-spawn@^6.0.5",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "react-dev-utils@^5.0.1",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "autoprefixer@7.1.6",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "babel-eslint@7.2.3",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "babel-jest@20.0.3",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "babel-loader@7.1.2",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "babel-preset-react-app@^3.1.1",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "babel-runtime@6.26.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "case-sensitive-paths-webpack-plugin@2.1.1",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "css-loader@0.28.7",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "dotenv@4.0.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "dotenv-expand@4.2.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "eslint@4.10.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "eslint-config-react-app@^2.1.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "eslint-loader@1.9.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "eslint-plugin-flowtype@2.39.1",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "eslint-plugin-import@2.8.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "eslint-plugin-jsx-a11y@5.1.1",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "eslint-plugin-react@7.4.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "extract-text-webpack-plugin@3.0.2",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "file-loader@1.1.5",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "fs-extra@3.0.1",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "fsevents@^1.1.3",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "html-webpack-plugin@2.29.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "jest@20.0.4",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "object-assign@4.1.1",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "postcss-flexbugs-fixes@3.2.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "postcss-loader@2.0.8",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "promise@8.0.1",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "raf@3.4.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "resolve@1.6.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "style-loader@0.19.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "sw-precache-webpack-plugin@0.11.4",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "url-loader@0.6.2",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "webpack@3.8.1",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "webpack-dev-server@2.9.4",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "webpack-manifest-plugin@1.3.2",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "whatwg-fetch@2.0.3",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "yargs@^12.0.1",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     }
+202 silly leaf dependencies   ],
+202 silly leaf dependencies   "@engr/ic-customize-loader": [
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "babel-core@^6.26.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "babel-traverse@^6.26.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "babylon@^6.18.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "loader-utils@^1.1.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     }
+202 silly leaf dependencies   ],
+202 silly leaf dependencies   "@engr/ic-scripts-rewired-customize": [
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "@engr/ic-customize-loader@^1.2.0",
+202 silly leaf dependencies       "isSatisfied": false
+202 silly leaf dependencies     }
+202 silly leaf dependencies   ],
+202 silly leaf dependencies   "@engr/ic-scripts-rewired-sass": [
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "node-sass@^4.9.2",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "sass-loader@^7.0.3",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     }
+202 silly leaf dependencies   ],
+202 silly leaf dependencies   "@engr/ic-scripts-rewired-server": [
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "cross-env@^5.2.0",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "cross-spawn@^6.0.5",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "detect-port@^1.2.3",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     },
+202 silly leaf dependencies     {
+202 silly leaf dependencies       "dependency": "react-dev-utils@^5.0.1",
+202 silly leaf dependencies       "isSatisfied": true
+202 silly leaf dependencies     }
+202 silly leaf dependencies   ]
+202 silly leaf dependencies }
+203 info Installing external dependencies
+204 verbose actions 1 actions, concurrency 4
+205 silly installInDir ic-scripts-rewired-customize [ '@engr/ic-customize-loader@^1.2.0' ]
+206 silly installInDir backup /Users/linzhipeng/Documents/project/engineering/packages/ic-scripts-rewired-customize/package.json
+207 silly rename [ '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts-rewired-customize/package.json',
+207 silly rename   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts-rewired-customize/package.json.lerna_backup' ]
+208 silly installInDir writing tempJson { dependencies: { '@engr/ic-customize-loader': '^1.2.0' } }
+209 silly getExecOpts { cwd: '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts-rewired-customize' }
+210 silly installInDir [ 'npm', [ 'install' ] ]
+211 silly installInDir cleanup /Users/linzhipeng/Documents/project/engineering/packages/ic-scripts-rewired-customize/package.json
+212 silly renameSync [ '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts-rewired-customize/package.json.lerna_backup',
+212 silly renameSync   '/Users/linzhipeng/Documents/project/engineering/packages/ic-scripts-rewired-customize/package.json' ]
+213 verbose installed leaf @engr/ic-scripts-rewired-customize
+214 error execute callback with error
+215 error Error: Command failed: npm install
+215 error npm ERR! code E404
+215 error npm ERR! 404 Not Found: @engr/ic-customize-loader@^1.2.0
+215 error
+215 error npm ERR! A complete log of this run can be found in:
+215 error npm ERR!     /Users/linzhipeng/.npm/_logs/2018-08-16T02_39_43_814Z-debug.log
+215 error
+215 error     at Promise.all.then.arr (/usr/local/lib/node_modules/lerna/node_modules/execa/index.js:236:11)
+215 error     at <anonymous>

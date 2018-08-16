@@ -1,0 +1,12 @@
+{
+  "name": "@engr/ic-scripts-rewired-aliases",
+  "version": "0.0.0",
+  "description": "Add Webpack aliases to your project without ejecting",
+  "target":"node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "admin",
+  "license": "ISC"
+}

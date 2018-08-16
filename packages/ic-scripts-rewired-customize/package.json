@@ -1,0 +1,17 @@
+{
+  "name": "@engr/ic-scripts-rewired-customize",
+  "version": "0.0.0",
+  "description": "Add Webpack customize-loader to your project without ejecting",
+  "target": "node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "admin",
+  "license": "ISC",
+  "dependencies": {
+    "@engr/ic-customize-config": "^0.0.0",
+    "@engr/ic-scripts-util": "^0.0.0",
+    "@engr/ic-customize-loader": "^0.0.0"
+  }
+}
