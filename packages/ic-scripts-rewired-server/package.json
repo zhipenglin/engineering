@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-scripts-rewired-server",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "add rewired webpack config to serevr",
   "target": "node",
   "main": "index.js",
@@ -10,7 +10,8 @@
   "author": "admin",
   "license": "ISC",
   "dependencies": {
-    "@engr/ic-scripts-util": "^0.0.5",
+    "@engr/ic-scripts-util": "^0.0.6",
+    "address": "^1.0.3",
     "cross-env": "^5.2.0",
     "cross-spawn": "^6.0.5",
     "detect-port": "^1.2.3",
