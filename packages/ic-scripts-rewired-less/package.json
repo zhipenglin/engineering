@@ -1,7 +1,7 @@
 {
-  "name": "@engr/ic-scripts-rewired-server",
+  "name": "@engr/ic-scripts-rewired-less",
   "version": "0.0.10",
-  "description": "add rewired webpack config to serevr",
+  "description": "Configure LESS in Create React App without ejecting",
   "target": "node",
   "main": "index.js",
   "scripts": {
@@ -11,10 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@engr/ic-scripts-util": "^0.0.10",
-    "address": "^1.0.3",
-    "cross-env": "^5.2.0",
-    "cross-spawn": "^6.0.5",
-    "detect-port": "^1.2.3",
-    "react-dev-utils": "^5.0.1"
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0"
   }
 }

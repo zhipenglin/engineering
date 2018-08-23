@@ -1,7 +1,7 @@
 {
-  "name": "@engr/ic-scripts-rewired-customize",
+  "name": "@engr/ic-scripts-rewired-postcss",
   "version": "0.0.10",
-  "description": "Add Webpack customize-loader to your project without ejecting",
+  "description": "Configure postcss in Create React App without ejecting",
   "target": "node",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,6 @@
   "author": "admin",
   "license": "ISC",
   "dependencies": {
-    "@engr/ic-customize-config": "^0.0.10",
-    "@engr/ic-customize-loader": "^0.0.10",
     "@engr/ic-scripts-util": "^0.0.10"
   }
 }
