@@ -1,14 +1,14 @@
 /**
- * @name: ic-scripts-rewired-sass ;
+ * @name: ic-scripts-rewired-less ;
  * @author: admin ;
- * @description: Configure SASS in Create React App without ejecting ;
+ * @description: Configure LESS in Create React App without ejecting ;
  * */
 
 const { getLoader, loaderNameMatches } = require("@engr/ic-scripts-util");
 
-const sassExtension = /\.s(c|a)ss$/;
+const lessExtension = /\.less$/;
 
-function createRewiredSass(sassLoaderOptions = {}) {
+function createRewiredLess(lessLoaderOptions = {}) {
     return function(config, env) {
         const oneOfRule = config.module.rules.find(
             rule => rule.oneOf !== undefined,
@@ -18,14 +18,14 @@ function createRewiredSass(sassLoaderOptions = {}) {
             return loaderNameMatches(rule, "file-loader") && rule.exclude;
         });
 
-        fileLoader.exclude.push(sassExtension);
+        fileLoader.exclude.push(lessExtension);
 
         const createRule = (rule, cssRules) => {
             const parse=(loader)=>{
                 const newLoader=loader.slice(0);
                 newLoader.push({
-                    loader:require.resolve("sass-loader"),
-                    options: sassLoaderOptions
+                    loader:require.resolve("less-loader"),
+                    options: lessLoaderOptions
                 });
 
                 return newLoader;
@@ -42,9 +42,9 @@ function createRewiredSass(sassLoaderOptions = {}) {
                 };
             }
         };
-        const sassRules = createRule(
+        const lessRules = createRule(
             {
-                test: sassExtension
+                test: lessExtension
             },
             getLoader(
                 config.module.rules,
@@ -53,9 +53,9 @@ function createRewiredSass(sassLoaderOptions = {}) {
         );
 
         if (oneOfRule) {
-            oneOfRule.oneOf.unshift(sassRules);
+            oneOfRule.oneOf.unshift(lessRules);
         } else {
-            config.module.rules.push(sassRules);
+            config.module.rules.push(lessRules);
         }
 
 
@@ -64,8 +64,8 @@ function createRewiredSass(sassLoaderOptions = {}) {
     };
 }
 
-const rewiredSass = createRewiredSass();
+const rewiredLess = createRewiredLess();
 
-rewiredSass.withLoaderOptions = createRewiredSass;
+rewiredLess.withLoaderOptions = createRewiredLess;
 
-module.exports = rewiredSass;
+module.exports = rewiredLess;

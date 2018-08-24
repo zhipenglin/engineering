@@ -55,7 +55,7 @@ const customize=require('@engr/ic-customize-config');
 switch (script) {
     case 'start':
     case 'test': {
-        runCommand(script,nodeArgs,`customizeTarget=${customize.devTarget}`);
+        runCommand(script,nodeArgs);
         break;
     }
     case 'build':

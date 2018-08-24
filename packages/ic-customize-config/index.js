@@ -41,9 +41,15 @@ if (!Array.isArray(updateList)) {
 updateList = intersection(all, updateList);
 
 module.exports = {
-    devTarget: customize.devTarget,
+    getTarget: (target)=>{
+        if(all.indexOf(target)>-1){
+            return target;
+        }else{
+            return 'common';
+        }
+    },
     updateList, all,
-    getFeatures: (name) => get(customize, `features[${name}]`, [])
+    getFeatures: (name) => get(customize, `features[${name||'common'}]`, [])
 };
 
 

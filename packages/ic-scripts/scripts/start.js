@@ -33,6 +33,12 @@ const paths = require('../config/paths');
 const overrides = require('../config-overrides');
 const config = overrides.webpack(require('../config/webpack.config.dev'),process.env.NODE_ENV);
 const createDevServerConfig = overrides.devServer(require('../config/webpackDevServer.config'),process.env.NODE_ENV);
+//修正DEV_TARGET
+const customize=require('@engr/ic-customize-config');
+if(typeof process.env.DEV_TARGET==='string'){
+    process.env.DEV_TARGET=customize.getTarget(process.env.DEV_TARGET);
+}
+
 //const config = require('../config/webpack.config.dev');
 //const createDevServerConfig = require('../config/webpackDevServer.config');
 //end
@@ -94,7 +100,7 @@ Promise.resolve(DEFAULT_PORT)
       if (isInteractive) {
         clearConsole();
       }
-      console.log(chalk.cyan(`Starting the development server ${chalk.green(process.env.customizeTarget||'')}...\n`));
+      console.log(chalk.cyan(`Starting the development server ${chalk.green(process.env.DEV_TARGET||'')}...\n`));
     //修改启动浏览器逻辑 添加 serverPort
     //openBrowser(prepareUrls(protocol, HOST, process.env.serverPort||port).localUrlForBrowser);
       const {event}=require('@engr/ic-scripts-util');

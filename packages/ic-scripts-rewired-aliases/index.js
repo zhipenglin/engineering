@@ -11,7 +11,4 @@ function createRewiredAliases(aliasesOptions = {}) {
     };
 }
 
-const rewiredAliases = createRewiredAliases();
-rewiredAliases.aliasesOptions = createRewiredAliases;
-
-module.exports = rewiredAliases;
+module.exports = createRewiredAliases;

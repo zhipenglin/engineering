@@ -33,7 +33,7 @@ const transform = (value, rules, basePath, extname, suffixList) => {
             }
         });
         return value;
-    }
+    };
     urlParser.walk((node) => {
         if (node.type === 'function' && node.value === 'url') {
             node.nodes.forEach((target) => {
