@@ -1,7 +1,7 @@
 {
-  "name": "@engr/ic-scripts-rewired-sass",
+  "name": "@engr/ic-scripts-rewired-babel",
   "version": "0.0.14",
-  "description": "Configure SASS in Create React App without ejecting",
+  "description": "Configure babel plugins or presets  in Create React App without ejecting",
   "target": "node",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,6 @@
   "author": "admin",
   "license": "ISC",
   "dependencies": {
-    "@engr/ic-scripts-util": "^0.0.14",
-    "node-sass": "^4.9.2",
-    "sass-loader": "^7.0.3"
+    "@engr/ic-scripts-util": "^0.0.14"
   }
 }
