@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-scripts-rewired-sass2customize",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "make sass support customize",
   "target": "node",
   "main": "index.js",
@@ -8,5 +8,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "admin",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@engr/ic-scripts-rewired-postcss": "^0.0.13",
+    "@engr/ic-scripts-util": "^0.0.13",
+    "postcss-scss": "^2.0.0"
+  }
 }
