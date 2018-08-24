@@ -1,7 +1,7 @@
 {
-  "name": "@engr/ic-scripts-util",
+  "name": "@engr/ic-scripts-rewired-sass2customize",
   "version": "0.0.12",
-  "description": "ic-script util",
+  "description": "make sass support customize",
   "target": "node",
   "main": "index.js",
   "scripts": {
