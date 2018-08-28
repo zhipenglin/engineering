@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-scripts",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "打包cli",
   "target": "node",
   "bin": {
@@ -12,9 +12,9 @@
   "author": "admin",
   "license": "ISC",
   "dependencies": {
-    "@engr/ic-customize-config": "^1.0.7",
-    "@engr/ic-scripts-util": "^1.0.7",
-    "@engr/ic-update-list-gitlib": "^1.0.7",
+    "@engr/ic-customize-config": "^1.1.0",
+    "@engr/ic-scripts-util": "^1.1.0",
+    "@engr/ic-update-list-gitlib": "^1.1.0",
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
