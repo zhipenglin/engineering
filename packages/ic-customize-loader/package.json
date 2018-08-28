@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-customize-loader",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "处理定制的postcss插件和webpack loader",
   "target": "node",
   "main": "index.js",
