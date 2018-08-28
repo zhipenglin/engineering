@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-scripts-util",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "ic-script util",
   "target": "node",
   "main": "index.js",
