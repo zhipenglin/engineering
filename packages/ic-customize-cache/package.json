@@ -1,9 +1,11 @@
 {
-  "name": "@engr/ic-update-list-gitlib",
+  "name": "@engr/ic-customize-cache",
   "version": "1.1.1",
-  "description": "从gitlib的合并中获取updateList",
+  "description": "打包缓存",
   "target": "node",
-  "main": "index.js",
+  "bin": {
+    "customize-cache": "index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@engr/ic-customize-config": "^1.1.1",
-    "cross-spawn": "^6.0.5",
-    "lodash": "^4.17.10"
+    "chalk": "^2.4.1",
+    "fs-extra": "^7.0.0"
   }
 }
