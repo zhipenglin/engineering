@@ -50,7 +50,7 @@ const runCommand=(script,nodeArgs,env)=>{
     }
 };
 
-const customize=require('@engr/ic-customize-config');
+const customize=require('@engr/ic-customize-config'),gitList=require('@engr/ic-update-list-gitlib')();
 
 switch (script) {
     case 'start':
@@ -59,10 +59,15 @@ switch (script) {
         break;
     }
     case 'build':
-        const updateList=customize.updateList;
-        if(updateList&&updateList.length>0){
+        let updateList=customize.all;
+        if(gitList.length>0){
+            updateList=gitList;
+        }else if(customize.updateList.length>0){
+            updateList=customize.updateList;
+        }
+        if(updateList.length>0){
             updateList.forEach((target)=>{
-                runCommand(script,nodeArgs,`customizeTarget=${target}`);
+                runCommand(script,nodeArgs,`CUSTOMIZE_TARGET=${target}`);
             });
         }else{
             runCommand(script,nodeArgs);

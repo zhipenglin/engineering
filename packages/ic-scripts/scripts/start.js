@@ -100,7 +100,7 @@ Promise.resolve(DEFAULT_PORT)
       if (isInteractive) {
         clearConsole();
       }
-      console.log(chalk.cyan(`Starting the development server ${chalk.green(process.env.DEV_TARGET||'')}...\n`));
+      console.log(chalk.cyan(`Starting the development server ${chalk.green(process.env.CUSTOMIZE_TARGET||'')}...\n`));
     //修改启动浏览器逻辑 添加 serverPort
     //openBrowser(prepareUrls(protocol, HOST, process.env.serverPort||port).localUrlForBrowser);
       const {event}=require('@engr/ic-scripts-util');

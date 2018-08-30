@@ -112,7 +112,7 @@ measureFileSizesBeforeBuild(buildDir)
 
 // Create the production build and print the deployment instructions.
 function build(previousFileSizes) {
-    console.log(`Creating an optimized production build ${chalk.green(process.env.customizeTarget || '')}...`);
+    console.log(`Creating an optimized production build ${chalk.green(process.env.CUSTOMIZE_TARGET || '')}...`);
 
     let compiler = webpack(config);
     return new Promise((resolve, reject) => {
@@ -141,7 +141,7 @@ function build(previousFileSizes) {
                         'Most CI servers set it automatically.\n'
                     )
                 );
-                return reject(new Error(messages.warnings.join('\n\n')));
+                //return reject(new Error(messages.warnings.join('\n\n')));
             }
             return resolve({
                 stats,

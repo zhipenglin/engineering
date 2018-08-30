@@ -4,24 +4,25 @@
  * @description: Add Webpack customize-loader to your project without ejecting ;
  * */
 
-const {getBabelLoader, loaderNameMatches, getLoader} = require("@engr/ic-scripts-util"), {getFeatures} = require('@engr/ic-customize-config'),customizePlugin=require('@engr/ic-customize-loader/postcssPlugin');
+const {getBabelLoader, loaderNameMatches, getLoader} = require("@engr/ic-scripts-util"), {getFeatures} = require('@engr/ic-customize-config'),
+    customizePlugin = require('@engr/ic-customize-loader/postcssPlugin');
 
-const createRewiredCustomize = (customizeLoaderOptions = {test: /@p@([./])/g,postcssOptions:{}}) => {
+const createRewiredCustomize = (customizeLoaderOptions = {test: /@p@([./])/g, postcssOptions: {}}) => {
     return (config, env) => {
         const babelLoader = getBabelLoader(config.module.rules), oldBabelLoader = Object.assign({}, babelLoader);
         delete babelLoader['loader'];
         delete babelLoader['options'];
-        let customizeTarget = process.env.DEV_TARGET;
+        let customizeTarget = process.env.CUSTOMIZE_TARGET;
         const features = getFeatures(customizeTarget),
             featuresString = features.map((name) => `${name}$1`).join(' ');
         if (customizeTarget === 'common') {
             customizeTarget = '';
         }
 
-        const rules=[
+        const rules = [
             {
                 test: customizeLoaderOptions.test,
-                value: `${customizeTarget?customizeTarget+'$1':''}${featuresString ? ' ' + featuresString : ''}`
+                value: `${customizeTarget ? customizeTarget + '$1' : ''}${featuresString ? ' ' + featuresString : ''}`
             }
         ];
 
@@ -42,14 +43,14 @@ const createRewiredCustomize = (customizeLoaderOptions = {test: /@p@([./])/g,pos
             return loaderNameMatches(rule, "postcss-loader");
         });
 
-        const postcssPlugins=postcssLoader.options.plugins();
+        const postcssPlugins = postcssLoader.options.plugins();
 
-        postcssPlugins.splice(0,0,customizePlugin({
+        postcssPlugins.splice(0, 0, customizePlugin({
             rules
         }));
 
-        postcssLoader.options.plugins=()=>postcssPlugins;
-        Object.assign(postcssLoader.options,customizeLoaderOptions.postcssOptions);
+        postcssLoader.options.plugins = () => postcssPlugins;
+        Object.assign(postcssLoader.options, customizeLoaderOptions.postcssOptions);
         return config;
     };
 };

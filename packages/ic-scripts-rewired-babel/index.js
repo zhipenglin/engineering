@@ -6,22 +6,22 @@
 
 const {getBabelLoader} = require('@engr/ic-scripts-util');
 
-module.exports=function(babelOptions={}){
+module.exports = function (babelOptions = {}) {
 
-    return (config,env)=>{
+    return (config, env) => {
         const babelLoader = getBabelLoader(config.module.rules);
 
-        if (!babelLoader.options.plugins) babelLoader.options.plugins = [];
-
-        if(Array.isArray(babelOptions.plugins)){
-            babelLoader.options.plugins.push(...babelOptions.plugins);
+        if (Array.isArray(babelOptions.plugins)) {
+            babelLoader.options.plugins = [...babelOptions.plugins];
         }
 
-        if (!babelLoader.options.presets) babelLoader.options.presets = [];
-
-        if(Array.isArray(babelOptions.presets)){
-            babelLoader.options.presets.push(...babelOptions.presets);
+        if (Array.isArray(babelOptions.presets)) {
+            babelLoader.options.presets = [...babelOptions.presets];
         }
+
+        const {plugins,presets,...others}=babelOptions;
+
+        Object.assign(babelLoader,others);
         return config;
     }
 };

@@ -33,6 +33,10 @@ if (all.indexOf('common')) {
     all.splice(0, 0, 'common');
 }
 
+if(updateList==='*'){
+    updateList=all.slice(0);
+}
+
 if (!Array.isArray(updateList)) {
     console.log(chalk.red('property updateList must be an array'));
     updateList = [];

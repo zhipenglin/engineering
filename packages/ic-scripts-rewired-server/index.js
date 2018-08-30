@@ -12,7 +12,7 @@ function createRewiredServer(serverOptions = {startCommand: 'egg-bin dev'}) {
     return (config, env) => {
         if (env === 'development') {
             //检查端口号，如果被占用，自动切到其他端口
-            const results = spawn.sync('node', [require.resolve('./lib/getPort.js'), 3000]);
+            const results = spawn.sync('node', [require.resolve('./lib/getPort.js')]);
             if (results.status === 0) {
                 const realPort = results.stdout.toString();
                 process.env.PORT = realPort;
@@ -25,7 +25,7 @@ function createRewiredServer(serverOptions = {startCommand: 'egg-bin dev'}) {
                 child.stdout.on('data', (data) => {
                     const stdout = data.toString();
                     console.log(stdout);
-                    if (stdout.indexOf('egg started') > -1) {
+                    if (stdout.indexOf(`${process.env.npm_package_name} started successfully`) > -1) {
                         openBrowser(`${protocol}://${process.env.HOST || address}:${process.env.SERVER_PORT}`);
                     }
                 });
