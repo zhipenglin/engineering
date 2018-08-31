@@ -1,7 +1,7 @@
 {
-  "name": "@engr/ic-scripts-util",
+  "name": "@engr/ic-customize-package",
   "version": "1.1.2-0",
-  "description": "ic-script util",
+  "description": "分离项目中的特性到特性包中，使特性更好维护",
   "target": "node",
   "main": "index.js",
   "scripts": {
