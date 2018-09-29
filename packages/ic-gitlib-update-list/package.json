@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-gitlib-update-list",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "从gitlib的合并中获取updateList",
   "target": "node",
   "main": "index.js",
@@ -10,7 +10,7 @@
   "author": "admin",
   "license": "ISC",
   "dependencies": {
-    "@engr/ic-customize-config": "^1.2.4",
+    "@engr/ic-customize-config": "^1.2.5",
     "chalk": "^2.4.1",
     "cross-spawn": "^6.0.5",
     "lodash": "^4.17.10"

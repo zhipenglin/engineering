@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-customize-config",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Parsing the customize file",
   "target": "node",
   "main": "index.js",
