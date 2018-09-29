@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-scripts-rewired-aliases",
-  "version": "1.1.7-0",
+  "version": "1.1.7-1",
   "description": "Add Webpack aliases to your project without ejecting",
   "target": "node",
   "main": "index.js",
