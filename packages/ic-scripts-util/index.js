@@ -4,19 +4,19 @@
  * @description: ic-script util ;
  * */
 
-const path = require('path');
+const path = require('path'), paths = require('./paths');
 
-const loaderNameMatches = function(rule, loader_name) {
+const loaderNameMatches = function (rule, loader_name) {
     return rule && rule.loader && typeof rule.loader === 'string' &&
         (rule.loader.indexOf(`${path.sep}${loader_name}${path.sep}`) !== -1 ||
             rule.loader.indexOf(`@${loader_name}${path.sep}`) !== -1);
 };
 
-const babelLoaderMatcher = function(rule) {
+const babelLoaderMatcher = function (rule) {
     return loaderNameMatches(rule, 'babel-loader');
 };
 
-const getLoader = function(rules, matcher) {
+const getLoader = function (rules, matcher) {
     let loader;
 
     rules.some(rule => {
@@ -28,11 +28,11 @@ const getLoader = function(rules, matcher) {
     return loader;
 };
 
-const getBabelLoader = function(rules) {
+const getBabelLoader = function (rules) {
     return getLoader(rules, babelLoaderMatcher);
 };
 
-const injectBabelPlugin = function(pluginName, config) {
+const injectBabelPlugin = function (pluginName, config) {
     const loader = getBabelLoader(config.module.rules);
     if (!loader) {
         console.log('babel-loader not found');
@@ -40,16 +40,30 @@ const injectBabelPlugin = function(pluginName, config) {
     }
     // Older versions of webpack have `plugins` on `loader.query` instead of `loader.options`.
     const options = loader.options || loader.query;
-    options.plugins =  [pluginName].concat(options.plugins || []);
+    options.plugins = [pluginName].concat(options.plugins || []);
     return config;
 };
 
-const EventEmitter=require('events').EventEmitter;
+const compose = function (...funcs) {
+    if (funcs.length === 0) {
+        return config => config;
+    }
 
-const event=new EventEmitter();
+    if (funcs.length === 1) {
+        return funcs[0];
+    }
+
+    return funcs.reduce((a, b) => (config, env) => a(b(config, env), env));
+};
+
+const EventEmitter = require('events').EventEmitter;
+
+const event = new EventEmitter();
 
 module.exports = {
     getLoader,
+    paths,
+    compose,
     loaderNameMatches,
     getBabelLoader,
     injectBabelPlugin,

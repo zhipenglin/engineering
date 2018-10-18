@@ -8,52 +8,110 @@ const fs = require('fs'),
     path = require('path'),
     get = require('lodash/get'),
     chalk = require('chalk'),
+    uniq = require('lodash/uniq'),
+    flatten = require('lodash/flatten'),
+    difference = require('lodash/difference'),
     intersection = require('lodash/intersection');
 
-const appDirectory = fs.realpathSync(process.cwd()),
-    customizePath = path.resolve(appDirectory, 'customize.json');
+const cache = {};
 
-let customize = {};
+class CustomizeConfig {
+    constructor(options) {
 
-if (fs.existsSync(customizePath)) {
-    try {
-        customize = loadJsonFile.sync(customizePath);
-    } catch (e) {
-        console.log(chalk.red(e.message));
+        this.getFeatures=this.getFeatures.bind(this);
+        this.formatUpdateList=this.formatUpdateList.bind(this);
+        this.formatTarget=this.formatTarget.bind(this);
+        this.formatFeature=this.formatFeature.bind(this);
+
+        const {configPath, cacheOpen} = Object.assign({cacheOpen: true}, options);
+
+        this.appDir = fs.realpathSync(process.cwd());
+        if (configPath) {
+            this.customizePath = path.resolve(this.appDir, configPath);
+        } else {
+            this.customizePath = path.resolve(this.appDir, 'customize.json');
+        }
+        this.origin = {};
+        if (cacheOpen && cache[this.customizePath]) {
+            Object.keys(cache[this.customizePath]).forEach((key) => this[key] = cache[this.customizePath][key]);
+            return this;
+        }
+        if (fs.existsSync(this.customizePath)) {
+            this.isCustomize=true;
+            try {
+                this.origin = loadJsonFile.sync(this.customizePath);
+            } catch (e) {
+                console.log(chalk.red(e.message));
+            }
+        }else{
+            this.isCustomize=false;
+        }
+
+        this.all = get(this.origin, 'all', []);
+        this.updateList = get(this.origin, 'updateList', []);
+
+        if (!Array.isArray(this.all)) {
+            console.log(chalk.red('property all must be an array'));
+            this.all = [];
+        }
+
+        if (this.all.indexOf('common')) {
+            this.all.splice(0, 0, 'common');
+        }
+
+        if (this.updateList === '*') {
+            this.updateList = this.all.slice(0);
+        }
+
+        if (!Array.isArray(this.updateList)) {
+            console.log(chalk.red('property updateList must be an array'));
+            this.updateList = [];
+        }
+
+        this.updateList = this.formatUpdateList(this.updateList);
+
+        this.features = difference(uniq(flatten(Object.values(get(this.origin, 'features', {})))), this.all);
+
+        if (cacheOpen) {
+            cache[this.customizePath] = {
+                all: this.all,
+                isCustomize:this.isCustomize,
+                origin: this.origin,
+                updateList: this.updateList,
+                features: this.features
+            };
+        }
+    }
+
+    get value(){
+        return {
+            all: this.all,
+            isCustomize:this.isCustomize,
+            origin: this.origin,
+            updateList: this.updateList,
+            features: this.features
+        };
+    }
+
+    getFeatures(name) {
+        return get(this.origin, `features[${this.formatTarget(name)}]`, []);
+    }
+
+    formatUpdateList(list) {
+        return intersection(this.all, list);
+    }
+
+    formatTarget(target) {
+        if (this.all.indexOf(target) > -1) {
+            return target;
+        } else {
+            return 'common';
+        }
+    }
+
+    formatFeature(name) {
+        return this.features.indexOf(name) > -1 ? name : '';
     }
 }
 
-let all = get(customize, 'all', []), updateList = get(customize, 'updateList', []);
-
-if (!Array.isArray(all)) {
-    console.log(chalk.red('property all must be an array'));
-    all = [];
-}
-if (all.indexOf('common')) {
-    all.splice(0, 0, 'common');
-}
-
-if(updateList==='*'){
-    updateList=all.slice(0);
-}
-
-if (!Array.isArray(updateList)) {
-    console.log(chalk.red('property updateList must be an array'));
-    updateList = [];
-}
-
-updateList = intersection(all, updateList);
-
-module.exports = {
-    getTarget: (target)=>{
-        if(all.indexOf(target)>-1){
-            return target;
-        }else{
-            return 'common';
-        }
-    },
-    updateList, all,
-    getFeatures: (name) => get(customize, `features[${name||'common'}]`, [])
-};
-
-
+module.exports = (...args)=>new CustomizeConfig(...args);

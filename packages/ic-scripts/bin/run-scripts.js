@@ -17,20 +17,21 @@ const scriptIndex = args.findIndex(
 const script = scriptIndex === -1 ? args[0] : args[scriptIndex];
 const nodeArgs = scriptIndex > 0 ? args.slice(0, scriptIndex) : [];
 
-const runCommand=(script,nodeArgs,env)=>{
-    const command=[];
-    if(env){
+const runCommand = (script, nodeArgs, env) => {
+    const command = [];
+    if (env) {
         command.push(env);
     }
     const result = spawn.sync(
         'cross-env',
-        command.concat('node',...nodeArgs)
+        command.concat('node', ...nodeArgs)
             .concat(require.resolve('../scripts/' + script))
             .concat(args.slice(scriptIndex + 1)),
-        { stdio: 'inherit' }
+        {stdio: 'inherit'}
     );
-    if(result.error){
+    if (result.error) {
         console.log(result.error);
+        process.exit(1);
     }
     if (result.signal) {
         if (result.signal === 'SIGKILL') {
@@ -50,27 +51,27 @@ const runCommand=(script,nodeArgs,env)=>{
     }
 };
 
-const customize=require('@engr/ic-customize-config'),gitList=require('@engr/ic-update-list-gitlib')();
+const customize = require('@engr/ic-customize-config')(), gitList = require('@engr/ic-gitlib-update-list')();
 
 switch (script) {
     case 'start':
     case 'test': {
-        runCommand(script,nodeArgs);
+        runCommand(script, nodeArgs);
         break;
     }
     case 'build':
-        let updateList=customize.all;
-        if(gitList.length>0){
-            updateList=gitList;
-        }else if(customize.updateList.length>0){
-            updateList=customize.updateList;
-        }
-        if(updateList.length>0){
-            updateList.forEach((target)=>{
-                runCommand(script,nodeArgs,`CUSTOMIZE_TARGET=${target}`);
+        if (customize.isCustomize === true) {
+            let updateList = customize.all;
+            if (gitList.length > 0) {
+                updateList = gitList;
+            } else if (customize.updateList.length > 0) {
+                updateList = customize.updateList;
+            }
+            updateList.forEach((target) => {
+                runCommand(script, nodeArgs, `CUSTOMIZE_TARGET=${target}`);
             });
-        }else{
-            runCommand(script,nodeArgs);
+        } else {
+            runCommand(script, nodeArgs);
         }
         break;
     default:

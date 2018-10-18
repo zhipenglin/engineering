@@ -1,7 +1,6 @@
 const traverse = require('babel-traverse').default,
     tactics = require('./tactics'),
-    rulesMatch = require('./rulesMatch'),
-    babel = require('babel-core');
+    rulesMatch = require('./rulesMatch');
 module.exports = (resolvePath, ast, rules) => {
     //转换目标路径
     traverse(ast, {
@@ -19,5 +18,5 @@ module.exports = (resolvePath, ast, rules) => {
             });
         }
     });
-    return babel.transformFromAst(ast).code;
+    return ast;
 };

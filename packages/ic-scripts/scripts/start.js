@@ -34,9 +34,9 @@ const overrides = require('../config-overrides');
 const config = overrides.webpack(require('../config/webpack.config.dev'),process.env.NODE_ENV);
 const createDevServerConfig = overrides.devServer(require('../config/webpackDevServer.config'),process.env.NODE_ENV);
 //修正DEV_TARGET
-const customize=require('@engr/ic-customize-config');
+const {formatTarget}=require('@engr/ic-customize-config')();
 if(typeof process.env.DEV_TARGET==='string'){
-    process.env.DEV_TARGET=customize.getTarget(process.env.DEV_TARGET);
+    process.env.DEV_TARGET=formatTarget(process.env.DEV_TARGET);
 }
 
 //const config = require('../config/webpack.config.dev');

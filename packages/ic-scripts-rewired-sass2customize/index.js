@@ -5,7 +5,7 @@
  * */
 
 const rewiredPostcss=require('@engr/ic-scripts-rewired-postcss'),
-    { getLoader, loaderNameMatches } = require("@engr/ic-scripts-util");;
+    { getLoader, loaderNameMatches } = require("@engr/ic-scripts-util");
 
 module.exports=function(config,env){
     config=rewiredPostcss((options)=>{

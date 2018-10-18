@@ -4,10 +4,17 @@
  * @description: Add Webpack customize-loader to your project without ejecting ;
  * */
 
-const {getBabelLoader, loaderNameMatches, getLoader} = require("@engr/ic-scripts-util"), {getFeatures} = require('@engr/ic-customize-config'),
+const {getBabelLoader, loaderNameMatches, getLoader, paths} = require("@engr/ic-scripts-util"),
+    {getFeatures} = require('@engr/ic-customize-config')(),
     customizePlugin = require('@engr/ic-customize-loader/postcssPlugin');
 
-const createRewiredCustomize = (customizeLoaderOptions = {test: /@p@([./])/g, postcssOptions: {}}) => {
+const createRewiredCustomize = (customizeLoaderOptions) => {
+    customizeLoaderOptions = Object.assign({}, {
+        test: /@p@([./])/g,
+        postcssOptions: {},
+        featureOptions: {}
+    }, customizeLoaderOptions);
+
     return (config, env) => {
         const babelLoader = getBabelLoader(config.module.rules), oldBabelLoader = Object.assign({}, babelLoader);
         delete babelLoader['loader'];
@@ -30,6 +37,7 @@ const createRewiredCustomize = (customizeLoaderOptions = {test: /@p@([./])/g, po
             {
                 loader: require.resolve('@engr/ic-customize-loader'),
                 options: {
+                    feature: customizeLoaderOptions.featureOptions,
                     rules
                 }
             },
@@ -51,6 +59,24 @@ const createRewiredCustomize = (customizeLoaderOptions = {test: /@p@([./])/g, po
 
         postcssLoader.options.plugins = () => postcssPlugins;
         Object.assign(postcssLoader.options, customizeLoaderOptions.postcssOptions);
+
+        if (customizeLoaderOptions.featureOptions.open) {
+            config.resolve.modules.push(paths.appFeature);
+            const oneOfRule = config.module.rules.find(
+                rule => rule.oneOf !== undefined,
+            );
+            if (oneOfRule) {
+                const jsLoader = getLoader(
+                    oneOfRule.oneOf,
+                    rule => String(rule.test) === String(/\.(js|jsx|mjs)$/)
+                );
+                if (!Array.isArray(jsLoader.include)) {
+                    jsLoader.include = [jsLoader.include];
+                }
+                jsLoader.include.push(paths.appFeature);
+            }
+        }
+
         return config;
     };
 };

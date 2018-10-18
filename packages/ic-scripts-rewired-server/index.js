@@ -6,7 +6,7 @@
 const spawn = require('cross-spawn');
 const {event} = require('@engr/ic-scripts-util');
 const openBrowser = require('react-dev-utils/openBrowser');
-const address=require('address').ip();
+const address = require('address').ip();
 
 function createRewiredServer(serverOptions = {startCommand: 'egg-bin dev'}) {
     return (config, env) => {
@@ -20,13 +20,14 @@ function createRewiredServer(serverOptions = {startCommand: 'egg-bin dev'}) {
             const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
             process.env.openBrowser = false;
             event.on('webpack-start-complete', () => {
+                const serverPort = process.env.SERVER_PORT || 7001;
                 const list = serverOptions.startCommand.split(' ').filter((command) => !!command),
-                    child = spawn('cross-env', [`STATIC_PORT=${process.env.PORT} DEV_TARGET=${process.env.DEV_TARGET}`, ...list]);
+                    child = spawn('cross-env', [`STATIC_PORT=${process.env.PORT} CUSTOMIZE_TARGET=${process.env.CUSTOMIZE_TARGET}`, ...list]);
                 child.stdout.on('data', (data) => {
                     const stdout = data.toString();
                     console.log(stdout);
                     if (stdout.indexOf(`${process.env.npm_package_name} started successfully`) > -1) {
-                        openBrowser(`${protocol}://${process.env.HOST || address}:${process.env.SERVER_PORT}`);
+                        openBrowser(`${protocol}://${process.env.HOST || address}:${serverPort}`);
                     }
                 });
                 child.stderr.on('data', (data) => {
