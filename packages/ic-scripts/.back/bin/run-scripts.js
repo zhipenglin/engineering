@@ -8,14 +8,7 @@
 
 'use strict';
 
-// Makes the script crash on unhandled rejections instead of silently
-// ignoring them. In the future, promise rejections that are not handled will
-// terminate the Node.js process with a non-zero exit code.
-process.on('unhandledRejection', err => {
-    throw err;
-});
-
-const spawn = require('react-dev-utils/crossSpawn');
+const spawn = require('cross-spawn');
 const args = process.argv.slice(2);
 
 const scriptIndex = args.findIndex(
@@ -29,7 +22,6 @@ const runCommand = (script, nodeArgs, env) => {
     if (env) {
         command.push(env);
     }
-    console.log(nodeArgs);
     const result = spawn.sync(
         'cross-env',
         command.concat('node', ...nodeArgs)
@@ -58,15 +50,16 @@ const runCommand = (script, nodeArgs, env) => {
         process.exit(1);
     }
 };
+
 const customize = require('@engr/ic-customize-config')(), gitList = require('@engr/ic-gitlib-update-list')();
+
 switch (script) {
-    case 'eject':
     case 'start':
     case 'test': {
         runCommand(script, nodeArgs);
         break;
     }
-    case 'build': {
+    case 'build':
         if (customize.isCustomize === true) {
             let updateList = customize.all;
             if (gitList.length > 0) {
@@ -81,12 +74,11 @@ switch (script) {
             runCommand(script, nodeArgs);
         }
         break;
-    }
     default:
         console.log('Unknown script "' + script + '".');
         console.log('Perhaps you need to update react-scripts?');
         console.log(
-            'See: https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#updating-to-new-releases'
+            'See: https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#updating-to-new-releases'
         );
         break;
 }
