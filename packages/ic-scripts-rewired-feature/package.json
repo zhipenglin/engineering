@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-scripts-rewired-feature",
-  "version": "1.2.9",
+  "version": "1.3.0-alpha",
   "description": "特性包支持",
   "target": "node",
   "main": "index.js",
@@ -10,6 +10,6 @@
   "author": "admin",
   "license": "ISC",
   "dependencies": {
-    "@engr/ic-scripts-util": "^1.2.9"
+    "@engr/ic-scripts-util": "^1.3.0-alpha"
   }
 }
