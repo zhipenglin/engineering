@@ -5,6 +5,7 @@
  * */
 const fs = require('fs'),
     loadJsonFile = require('load-json-file'),
+    {paths} = require('@engr/ic-scripts-util'),
     path = require('path'),
     get = require('lodash/get'),
     chalk = require('chalk'),
@@ -18,18 +19,17 @@ const cache = {};
 class CustomizeConfig {
     constructor(options) {
 
-        this.getFeatures=this.getFeatures.bind(this);
-        this.formatUpdateList=this.formatUpdateList.bind(this);
-        this.formatTarget=this.formatTarget.bind(this);
-        this.formatFeature=this.formatFeature.bind(this);
+        this.getFeatures = this.getFeatures.bind(this);
+        this.formatUpdateList = this.formatUpdateList.bind(this);
+        this.formatTarget = this.formatTarget.bind(this);
+        this.formatFeature = this.formatFeature.bind(this);
 
         const {configPath, cacheOpen} = Object.assign({cacheOpen: true}, options);
 
-        this.appDir = fs.realpathSync(process.cwd());
         if (configPath) {
-            this.customizePath = path.resolve(this.appDir, configPath);
+            this.customizePath = path.resolve(paths.appRoot, configPath);
         } else {
-            this.customizePath = path.resolve(this.appDir, 'customize.json');
+            this.customizePath = paths.customizeConfig;
         }
         this.origin = {};
         if (cacheOpen && cache[this.customizePath]) {
@@ -37,14 +37,22 @@ class CustomizeConfig {
             return this;
         }
         if (fs.existsSync(this.customizePath)) {
-            this.isCustomize=true;
+            this.isCustomize = true;
             try {
                 this.origin = loadJsonFile.sync(this.customizePath);
+                const featureConfig = {};
+                fs.readdirSync(paths.appFeature).forEach((name) => {
+                    const featureConfigPath = path.resolve(paths.appFeature, name, 'featureConfig.json');
+                    if (fs.existsSync(featureConfigPath)) {
+                        featureConfig[name] = loadJsonFile.sync(featureConfigPath);
+                    }
+                });
+                Object.assign(this.origin.features,featureConfig);
             } catch (e) {
                 console.log(chalk.red(e.message));
             }
-        }else{
-            this.isCustomize=false;
+        } else {
+            this.isCustomize = false;
         }
 
         this.all = get(this.origin, 'all', []);
@@ -68,28 +76,40 @@ class CustomizeConfig {
             this.updateList = [];
         }
 
-        this.updateList = this.formatUpdateList(this.updateList);
+        this.freezeList = [], this.activeList = this.all;
+        if (fs.existsSync(paths.appFeature)) {
+            const freezeList = fs.readdirSync(paths.appFeature).filter((name) => {
+                return fs.existsSync(path.resolve(paths.appFeature, name, 'original.json'));
+            });
+            this.freezeList = intersection(this.all, freezeList);
+            this.activeList = this.all.filter((name) => this.freezeList.indexOf(name) == -1||name==='common');
+        }
 
+        this.updateList = this.formatUpdateList(this.updateList);
         this.features = difference(uniq(flatten(Object.values(get(this.origin, 'features', {})))), this.all);
 
         if (cacheOpen) {
             cache[this.customizePath] = {
                 all: this.all,
-                isCustomize:this.isCustomize,
+                isCustomize: this.isCustomize,
                 origin: this.origin,
                 updateList: this.updateList,
-                features: this.features
+                features: this.features,
+                freezeList:this.freezeList,
+                activeList:this.activeList
             };
         }
     }
 
-    get value(){
+    get value() {
         return {
             all: this.all,
-            isCustomize:this.isCustomize,
+            isCustomize: this.isCustomize,
             origin: this.origin,
             updateList: this.updateList,
-            features: this.features
+            features: this.features,
+            freezeList:this.freezeList,
+            activeList:this.activeList
         };
     }
 
@@ -98,7 +118,7 @@ class CustomizeConfig {
     }
 
     formatUpdateList(list) {
-        return intersection(this.all, list);
+        return intersection(this.activeList, list);
     }
 
     formatTarget(target) {
@@ -114,4 +134,4 @@ class CustomizeConfig {
     }
 }
 
-module.exports = (...args)=>new CustomizeConfig(...args);
+module.exports = (...args) => new CustomizeConfig(...args);

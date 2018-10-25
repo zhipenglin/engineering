@@ -20,5 +20,6 @@ module.exports = {
   configOverrides: resolveApp('config-overrides.js'),
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveApp('src/setupTests.js'),
+  proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules')
 };

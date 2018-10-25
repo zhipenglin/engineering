@@ -9,7 +9,7 @@ const spawn = require('cross-spawn'),
     customizeConfig = require('@engr/ic-customize-config');
 
 module.exports = function () {
-    const {isCustomize, all, formatUpdateList} = customizeConfig();
+    const {isCustomize, activeList, formatUpdateList} = customizeConfig();
     if (!isCustomize) {
         console.log(chalk.yellow('该项目为非定制项目，跳过解析'));
         return [];
@@ -18,11 +18,11 @@ module.exports = function () {
     if (result.status === 0) {
         const msg = result.stdout.toString();
         const match = msg.replace(/[\n\r]/g, '').match(/Merge branch .* into \'(release|hotfix)\/[0-9]{8}\'.*\$\{(.*)\}.*See merge request/);
-        if (match && match[1]) {
-            if (match[1] === '*') {
-                return all.slice(0);
+        if (match && match[2]) {
+            if (match[2] === '*') {
+                return activeList.slice(0);
             }
-            return formatUpdateList(match[1].replace(/\s/g, '').split(','));
+            return formatUpdateList(match[2].replace(/\s/g, '').split(','));
         }
     }
     return [];

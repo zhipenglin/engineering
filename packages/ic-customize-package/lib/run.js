@@ -1,6 +1,8 @@
 const glob = require("glob"),
     path = require('path'),
     fs = require('fs-extra'),
+    loadJsonFile = require('load-json-file'),
+    writeJsonFile = require('write-json-file'),
     {paths} = require('@engr/ic-scripts-util');
 
 const globPromise = (...args) => {
@@ -15,18 +17,30 @@ const globPromise = (...args) => {
 };
 
 const originalFileName = 'original.json';
+const featureConfigName = 'featureConfig.json';
 
 const pack = async (name) => {
-    const files = await globPromise(path.join(paths.appSrc, `/**/*?(.)${name}?(.*)`), {
+    const filesArray = await globPromise(path.join(paths.appSrc, `/**/*?(.)${name}?(.*)`), {
         ignore: path.join(paths.appSrc, 'tob/**/*')
     }), featurePath = path.resolve(paths.appFeature, name);
-    if (files.length === 0) {
-        console.log('未在源码目录搜索到任何特性相关文件，可能是由于该特性已经被抽出');
+    if (await fs.exists(featurePath)) {
+        console.log('该特性包已存在，可能是由于该特性已经被抽出');
         return;
+    }
+
+    let files = [];
+    for (let index = 0; index < filesArray.length; index++) {
+        const target = filesArray[index], stats = await fs.stat(target);
+        if (stats && stats.isDirectory()) {
+            files = files.concat(await globPromise(path.join(target, '/**/*'), {nodir: true}));
+        } else {
+            files.push(target);
+        }
     }
 
     console.log(`共查找到${files.length}个特性文件`);
     console.log('执行特性文件抽出');
+
     const mapList = [];
     await fs.ensureDir(featurePath);
     await Promise.all(files.map((src) => {
@@ -35,12 +49,19 @@ const pack = async (name) => {
         mapList.push({
             target: path.relative(paths.appRoot, targetPath), original: path.relative(paths.appRoot, src)
         });
-        console.log(`cp ${src},${targetPath}`);
         return fs.copy(src, targetPath);
     }));
     console.log('执行特性文件映射');
     await fs.writeJson(path.resolve(featurePath, originalFileName), mapList);
+    console.log('执行特性配置的抽出');
+    const customizeConfig = await loadJsonFile(paths.customizeConfig), featureConfig = customizeConfig.features[name];
+    if (featureConfig) {
+        delete customizeConfig.features[name];
+        await writeJsonFile(path.resolve(featurePath, featureConfigName), featureConfig);
+    }
+
     console.log('执行源文件清理');
+    featureConfig && await writeJsonFile(paths.customizeConfig, customizeConfig);
     await Promise.all(mapList.map(({original}) => fs.remove(path.resolve(paths.appRoot, original))));
     console.log(`完成特性${name}的抽出`);
 };
@@ -55,6 +76,15 @@ const unpack = async (name) => {
     }
     console.log('将特性包释放到源文件夹中');
     await Promise.all(list.map(({target, original}) => fs.copy(path.resolve(paths.appRoot, target), path.resolve(paths.appRoot, original))));
+    const featureConfigPath=path.resolve(featurePath,featureConfigName);
+    if(await fs.exists(featureConfigPath)){
+        const customizeConfig = await loadJsonFile(paths.customizeConfig),
+            featureConfig=await loadJsonFile(featureConfigPath);
+        customizeConfig["features"][name]=featureConfig;
+        writeJsonFile(paths.customizeConfig,customizeConfig);
+        console.log('恢复customize.json配置');
+    }
+
     console.log('删除特性包');
     await fs.remove(featurePath);
     console.log(`完成特性包${name}释放`);
