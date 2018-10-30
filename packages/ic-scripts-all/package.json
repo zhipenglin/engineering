@@ -1,7 +1,7 @@
 {
-  "name": "@engr/ic-scripts-rewired-sass",
+  "name": "@engr/ic-scripts-all",
   "version": "2.0.0-0",
-  "description": "Configure SASS in Create React App without ejecting",
+  "description": "提供全部打包命令",
   "target": "node",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,6 @@
   "author": "admin",
   "license": "ISC",
   "dependencies": {
-    "@engr/ic-scripts-util": "^2.0.0-0",
-    "node-sass": "^4.9.2",
-    "sass-loader": "^7.0.3"
+    "dotenv": "^6.1.0"
   }
 }
