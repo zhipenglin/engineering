@@ -68,7 +68,7 @@ const createRewiredCustomize = (customizeLoaderOptions) => {
             if (oneOfRule) {
                 const jsLoader = getLoader(
                     oneOfRule.oneOf,
-                    rule => String(rule.test) === String(/\.(js|jsx|mjs)$/)
+                    rule => String(rule.test) === String(/\.(js|mjs|jsx)$/)
                 );
                 if (!Array.isArray(jsLoader.include)) {
                     jsLoader.include = [jsLoader.include];

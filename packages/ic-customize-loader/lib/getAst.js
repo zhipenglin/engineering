@@ -1,7 +1,7 @@
-const babylon = require('babylon');
+const parser = require('@babel/parser');
 
 module.exports = (content) => {
-    return babylon.parse(content, {
+    return parser.parse(content, {
         sourceType: "module",
         plugins: ["dynamicImport", "jsx"]
     });

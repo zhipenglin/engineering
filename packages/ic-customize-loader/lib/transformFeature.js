@@ -1,6 +1,6 @@
 const minimatch = require('minimatch'),
     path = require('path'),
-    traverse = require('babel-traverse').default,
+    traverse = require('@babel/traverse').default,
     tactics = require('./tactics'),
     transformSrcPath=require('./transformSrcPath'),
     {paths} = require('@engr/ic-scripts-util');

@@ -4,7 +4,7 @@ const paths=require('../lib/paths'),
     runCommand=require('../lib/runCommand');
 
 module.exports=async ()=>{
-    await fs.emptyDir(paths.rep);
+    await Promise.all([fs.emptyDir(paths.rep),fs.emptyDir(paths.cache)]);
     await runCommand('git',['clone',paths.url],{
         cwd:paths.rep
     }).then(()=>{

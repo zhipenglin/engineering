@@ -67,16 +67,17 @@ const writeStatsJson = argv.indexOf('--stats') !== -1;
 // We require that you explictly set browsers and do not fall back to
 // browserslist defaults.
 const {checkBrowsers} = require('react-dev-utils/browsersHelper');
+const appBuild=path.join(paths.appBuild,process.env.CUSTOMIZE_TARGET||'');
 checkBrowsers(paths.appPath, isInteractive)
     .then(() => {
         // First, read the current file sizes in build directory.
         // This lets us display how much they changed later.
-        return measureFileSizesBeforeBuild(paths.appBuild);
+        return measureFileSizesBeforeBuild(appBuild);
     })
     .then(previousFileSizes => {
         // Remove all content but keep the directory so that
         // if you're in it, you don't end up in Trash
-        fs.emptyDirSync(paths.appBuild);
+        fs.emptyDirSync(appBuild);
         // Merge with the public folder
         copyPublicFolder();
         // Start the webpack build
@@ -105,7 +106,7 @@ checkBrowsers(paths.appPath, isInteractive)
             printFileSizesAfterBuild(
                 stats,
                 previousFileSizes,
-                paths.appBuild,
+                appBuild,
                 WARN_AFTER_BUNDLE_GZIP_SIZE,
                 WARN_AFTER_CHUNK_GZIP_SIZE
             );
@@ -114,7 +115,7 @@ checkBrowsers(paths.appPath, isInteractive)
             const appPackage = require(paths.appPackageJson);
             const publicUrl = paths.publicUrl;
             const publicPath = config.output.publicPath;
-            const buildFolder = path.relative(process.cwd(), paths.appBuild);
+            const buildFolder = path.relative(process.cwd(), appBuild);
             printHostingInstructions(
                 appPackage,
                 publicUrl,
@@ -187,7 +188,7 @@ function build(previousFileSizes) {
             };
             if (writeStatsJson) {
                 return bfj
-                    .write(paths.appBuild + '/bundle-stats.json', stats.toJson())
+                    .write(appBuild + '/bundle-stats.json', stats.toJson())
                     .then(() => resolve(resolveArgs))
                     .catch(error => reject(new Error(error)));
             }
@@ -198,7 +199,7 @@ function build(previousFileSizes) {
 }
 
 function copyPublicFolder() {
-    fs.copySync(paths.appPublic, paths.appBuild, {
+    fs.copySync(paths.appPublic, appBuild, {
         dereference: true,
         filter: file => file !== paths.appHtml,
     });

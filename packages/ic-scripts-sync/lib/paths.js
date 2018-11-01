@@ -9,6 +9,7 @@ module.exports = {
     url: 'http://192.168.1.199:8080/web/fe.git',
     app: appDir,
     branch: process.env.TOB_BRANCH,
+    cache: path.resolve(__dirname, '../.cache'),
     target: path.resolve(appDir, process.env.TOB_TARGET || 'src/tob'),
     rep: repDir,
     git: path.resolve(repDir, 'fe/'),

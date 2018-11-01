@@ -48,11 +48,6 @@ const paths = require('../config/paths');
 const overrides = require('../config-overrides');
 const config = overrides.webpack(require('../config/webpack.config.dev'), process.env.NODE_ENV);
 const createDevServerConfig = overrides.devServer(require('../config/webpackDevServer.config'), process.env.NODE_ENV);
-//修正CUSTOMIZE_TARGET
-const {formatTarget}=require('@engr/ic-customize-config')();
-if(typeof process.env.CUSTOMIZE_TARGET==='string'){
-    process.env.CUSTOMIZE_TARGET=formatTarget(process.env.CUSTOMIZE_TARGET);
-}
 
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;

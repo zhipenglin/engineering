@@ -1,4 +1,4 @@
-const traverse = require('babel-traverse').default,
+const traverse = require('@babel/traverse').default,
     tactics = require('./tactics'),
     rulesMatch = require('./rulesMatch');
 module.exports = (resolvePath, ast, rules) => {

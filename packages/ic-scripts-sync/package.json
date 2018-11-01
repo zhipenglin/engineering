@@ -1,0 +1,21 @@
+{
+  "name": "@engr/ic-scripts-sync",
+  "version": "2.0.0-8.0",
+  "description": "同步tob代码",
+  "target": "node",
+  "bin": {
+    "run-sync": "./bin/run-sync.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "cross-spawn": "^6.0.5",
+    "dotenv": "^6.0.0",
+    "fs-extra": "^7.0.0",
+    "yargs": "^12.0.1"
+  },
+  "author": "admin",
+  "license": "ISC"
+}

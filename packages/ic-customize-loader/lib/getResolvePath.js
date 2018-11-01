@@ -1,4 +1,4 @@
-const traverse = require('babel-traverse').default,
+const traverse = require('@babel/traverse').default,
     tactics = require('./tactics'),
     path = require('path'),
     {paths} = require('@engr/ic-scripts-util'),

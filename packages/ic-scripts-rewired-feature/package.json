@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-scripts-rewired-feature",
-  "version": "2.0.0-0",
+  "version": "2.0.0-8.0",
   "description": "特性包支持",
   "target": "node",
   "main": "index.js",
@@ -10,6 +10,6 @@
   "author": "admin",
   "license": "ISC",
   "dependencies": {
-    "@engr/ic-scripts-util": "^2.0.0-0"
+    "@engr/ic-scripts-util": "^2.0.0-8.0"
   }
 }

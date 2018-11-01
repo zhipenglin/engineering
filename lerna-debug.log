@@ -1,25 +1,25 @@
-0 silly input [ 'node-sass' ]
+0 silly input [ 'dotenv' ]
 1 silly flags { _: [ 'add' ],
 1 silly flags   'reject-cycles': false,
 1 silly flags   rejectCycles: false,
 1 silly flags   dev: false,
 1 silly flags   D: false,
-1 silly flags   scope: '@engr/ic-scripts',
-1 silly flags   args: [ 'node-sass' ] }
+1 silly flags   scope: '@engr/ic-scripts-all',
+1 silly flags   args: [ 'dotenv' ] }
 2 verbose rootPath /Users/linzhipeng/Documents/project/engineering
 3 info version 2.11.0
 4 silly isInitialized
 5 silly isInitialized true
 6 silly existsSync /Users/linzhipeng/Documents/project/engineering/VERSION
-7 info scope @engr/ic-scripts
+7 info scope @engr/ic-scripts-all
 8 error EPACKAGES Errored while collecting packages and package graph
-9 error Error: No packages found that match scope '@engr/ic-scripts'
-9 error     at Function.filterPackages (/usr/local/lib/node_modules/lerna/lib/PackageUtilities.js:252:17)
-9 error     at AddCommand.runPreparations (/usr/local/lib/node_modules/lerna/lib/Command.js:333:60)
-9 error     at /usr/local/lib/node_modules/lerna/lib/Command.js:209:18
-9 error     at new Promise (<anonymous>)
-9 error     at AddCommand.run (/usr/local/lib/node_modules/lerna/lib/Command.js:193:14)
-9 error     at Object.handler (/usr/local/lib/node_modules/lerna/lib/commands/AddCommand.js:79:14)
-9 error     at Object.self.runCommand (/usr/local/lib/node_modules/lerna/node_modules/yargs/lib/command.js:233:22)
-9 error     at Object.Yargs.self._parseArgs (/usr/local/lib/node_modules/lerna/node_modules/yargs/yargs.js:990:30)
-9 error     at Object.Yargs.self.parse (/usr/local/lib/node_modules/lerna/node_modules/yargs/yargs.js:532:23)
+9 error JSONError: Unexpected token < in JSON at position 471 while parsing near '...  "dependencies": {<<<<<<< HEAD    "@e...' in packages/ic-scripts/package.json
+9 error     at module.exports (/usr/local/lib/node_modules/lerna/node_modules/parse-json/index.js:26:19)
+9 error     at parse (/usr/local/lib/node_modules/lerna/node_modules/load-json-file/index.js:8:29)
+9 error     at Function.module.exports.sync.fp [as sync] (/usr/local/lib/node_modules/lerna/node_modules/load-json-file/index.js:11:29)
+9 error     at Function.module.exports.sync (/usr/local/lib/node_modules/lerna/node_modules/read-pkg/index.js:40:25)
+9 error     at /usr/local/lib/node_modules/lerna/lib/PackageUtilities.js:138:47
+9 error     at Array.forEach (<anonymous>)
+9 error     at /usr/local/lib/node_modules/lerna/lib/PackageUtilities.js:132:86
+9 error     at Array.forEach (<anonymous>)
+9 error     at Function.getPackages (/usr/local/lib/node_modules/lerna/lib/PackageUtilities.js:131:22)

@@ -41,13 +41,13 @@ class CustomizeConfig {
             try {
                 this.origin = loadJsonFile.sync(this.customizePath);
                 const featureConfig = {};
-                fs.readdirSync(paths.appFeature).forEach((name) => {
+                fs.existsSync(paths.appFeature)&&fs.readdirSync(paths.appFeature).forEach((name) => {
                     const featureConfigPath = path.resolve(paths.appFeature, name, 'featureConfig.json');
                     if (fs.existsSync(featureConfigPath)) {
                         featureConfig[name] = loadJsonFile.sync(featureConfigPath);
                     }
                 });
-                Object.assign(this.origin.features,featureConfig);
+                this.origin.features = Object.assign({}, this.origin.features, featureConfig);
             } catch (e) {
                 console.log(chalk.red(e.message));
             }
@@ -82,7 +82,7 @@ class CustomizeConfig {
                 return fs.existsSync(path.resolve(paths.appFeature, name, 'original.json'));
             });
             this.freezeList = intersection(this.all, freezeList);
-            this.activeList = this.all.filter((name) => this.freezeList.indexOf(name) == -1||name==='common');
+            this.activeList = this.all.filter((name) => this.freezeList.indexOf(name) == -1 || name === 'common');
         }
 
         this.updateList = this.formatUpdateList(this.updateList);
@@ -95,8 +95,8 @@ class CustomizeConfig {
                 origin: this.origin,
                 updateList: this.updateList,
                 features: this.features,
-                freezeList:this.freezeList,
-                activeList:this.activeList
+                freezeList: this.freezeList,
+                activeList: this.activeList
             };
         }
     }
@@ -108,8 +108,8 @@ class CustomizeConfig {
             origin: this.origin,
             updateList: this.updateList,
             features: this.features,
-            freezeList:this.freezeList,
-            activeList:this.activeList
+            freezeList: this.freezeList,
+            activeList: this.activeList
         };
     }
 
