@@ -1,15 +1,20 @@
 {
   "name": "@engr/ic-scripts-all",
-  "version": "2.0.0-0",
+  "version": "2.0.0-8.0",
   "description": "提供全部打包命令",
   "target": "node",
-  "main": "index.js",
+  "bin": {
+    "run-all": "./bin/run-all.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "admin",
   "license": "ISC",
   "dependencies": {
+    "@engr/ic-customize-config": "^2.0.0-8.0",
+    "@engr/ic-gitlib-update-list": "^2.0.0-8.0",
+    "cross-env": "^5.2.0",
     "dotenv": "^6.1.0"
   }
 }
