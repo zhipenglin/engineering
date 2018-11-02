@@ -10,8 +10,7 @@ function createRewiredPostcss(callback = (options)=>options) {
     return function (config) {
         getLoader(config.module.rules, rule => {
             if(loaderNameMatches(rule, "postcss-loader")){
-                const postcssLoader=rule;
-                postcssLoader.options=callback(postcssLoader.options);
+                rule.options=callback(rule.options);
             }
         });
         return config;
