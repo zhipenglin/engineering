@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-scripts-rewired-postcss",
-  "version": "2.0.0-8.1",
+  "version": "2.0.0-8.2",
   "description": "Configure postcss in Create React App without ejecting",
   "target": "node",
   "main": "index.js",
@@ -10,6 +10,6 @@
   "author": "admin",
   "license": "ISC",
   "dependencies": {
-    "@engr/ic-scripts-util": "^2.0.0-8.1"
+    "@engr/ic-scripts-util": "^2.0.0-8.2"
   }
 }
