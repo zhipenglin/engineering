@@ -3,6 +3,7 @@
 const spawn = require('cross-spawn');
 const customize = require('@engr/ic-customize-config')(), gitList = require('@engr/ic-gitlib-update-list')();
 const args = process.argv.slice(2);
+const path=require('path');
 const scriptIndex = args.findIndex(
     x => x === 'build' || x === 'eject' || x === 'start' || x === 'test'
 );
@@ -12,7 +13,7 @@ const nodeArgs = scriptIndex > 0 ? args.slice(0, scriptIndex) : [];
 const runCommand = (commond, script, ...env) => {
     let envList = [];
     if (env) {
-        envList=env;
+        envList = env;
     }
     const results = spawn.sync(
         'cross-env',
@@ -28,14 +29,16 @@ const runCommand = (commond, script, ...env) => {
     return results;
 };
 
-
 if (script === 'build' && customize.isCustomize) {
-    let updateList = customize.all;
+    require('dotenv').config({path: process.env.ENV_PATH || path.resolve(process.cwd(),'.env.local')});
+
+    let updateList = customize.updateList || customize.all;
     if (gitList.length > 0) {
         updateList = gitList;
-    } else if (customize.updateList.length > 0) {
-        process.env.ENV_PATH && require('dotenv').config({path: process.env.ENV_PATH});
-        updateList = process.env.CUSTOMIZE_LIST || customize.updateList;
+    }
+    const customizeList = customize.formatUpdateList((process.env.CUSTOMIZE_LIST || '').split(','));
+    if (customizeList.length > 0) {
+        updateList = customizeList;
     }
     for (let index = 0; index < updateList.length; index++) {
         const customize = updateList[index];
@@ -56,7 +59,7 @@ if (script === 'build' && customize.isCustomize) {
             };
         });
         const args = tobBranchMapping[customize] || tobBranchMapping['default'];
-        const syncResults = runCommand('run-sync', 'sync', `TOB_BRANCH=${args.value}`,`IS_FORCE=${args.isForce ? 'true' : 'false'}`);
+        const syncResults = runCommand('run-sync', 'sync', `TOB_BRANCH=${args.value}`, `IS_FORCE=${args.isForce ? 'true' : 'false'}`);
         if (syncResults.signal) {
             return process.exit(1);
         }
