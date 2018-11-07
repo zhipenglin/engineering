@@ -9,10 +9,10 @@ const scriptIndex = args.findIndex(
 const script = scriptIndex === -1 ? args[0] : args[scriptIndex];
 const nodeArgs = scriptIndex > 0 ? args.slice(0, scriptIndex) : [];
 
-const runCommand = (commond, script, env) => {
-    const envList = [];
+const runCommand = (commond, script, ...env) => {
+    let envList = [];
     if (env) {
-        envList.push(env);
+        envList=env;
     }
     const results = spawn.sync(
         'cross-env',
@@ -56,7 +56,7 @@ if (script === 'build' && customize.isCustomize) {
             };
         });
         const args = tobBranchMapping[customize] || tobBranchMapping['default'];
-        const syncResults = runCommand('sync-tob', 'sync', `TOB_BRANCH=${args.value}&IS_FORCE=${args.isForce ? 'true' : 'false'}`);
+        const syncResults = runCommand('run-sync', 'sync', `TOB_BRANCH=${args.value}`,`IS_FORCE=${args.isForce ? 'true' : 'false'}`);
         if (syncResults.signal) {
             return process.exit(1);
         }

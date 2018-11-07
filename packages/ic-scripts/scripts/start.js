@@ -115,6 +115,8 @@ checkBrowsers(paths.appPath, isInteractive)
                 clearConsole();
             }
             console.log(chalk.cyan(`Starting the development server ${chalk.green(process.env.CUSTOMIZE_TARGET||'')}...\n`));
+            const {event}=require('@engr/ic-scripts-util');
+            event.emit('webpack-start-complete');
             //rewire 可以通过环境变量控制是否自动打开浏览器
             process.env.openBrowser!=='false'&&openBrowser(urls.localUrlForBrowser);
         });

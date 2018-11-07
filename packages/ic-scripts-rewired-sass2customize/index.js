@@ -15,7 +15,7 @@ module.exports=function(config,env){
 
     const sassRules=getLoader(
         config.module.rules,
-        rule => String(rule.test) === String(/\.s(c|a)ss$/),
+        rule => String(rule.test) === String(/\.(scss|sass)$/),
     );
 
     const parse=(loader)=>{
