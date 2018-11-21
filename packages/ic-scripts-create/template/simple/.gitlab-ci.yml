@@ -1,0 +1,97 @@
+stages:
+  - check    # 项目检测
+  - build    # 线上代码打包
+  - deploy   # 部署到开发环境，同步到 SVN
+
+项目规范检测:
+  stage: check
+  script:
+    - psc --alias php-api --notify
+  only:  # 只检测除 master 之外的分支提交
+    - branches
+  except:
+    - master
+
+前端代码打包:
+  stage: build
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    paths:
+      - build
+    policy: push
+  before_script:
+#    - nvm install
+    - nvm use
+    - PROJECT_DEPS_DIR=~/${CI_PROJECT_PATH//\//_}_deps
+    - echo $PROJECT_DEPS_DIR
+    - mkdir -p $PROJECT_DEPS_DIR
+    - ln -sf $(pwd)/package*.json $PROJECT_DEPS_DIR/
+    - npm install --registry=http://npm.zhinanzhen.ai --prefix=$PROJECT_DEPS_DIR
+    - NODE_PATH=$PROJECT_DEPS_DIR/node_modules
+    - ln -sf $NODE_PATH node_modules
+  after_script:
+    - unset NODE_PATH PROJECT_DEPS_DIR
+  script:
+    - npm run build -- --color
+    - rm -rf src
+  only:  # 上线分支自动打包，master自动打包
+    - /^(release|hotfix)\/.+$/
+    - master
+
+部署release分支:
+  stage: deploy
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    paths:
+      - build/
+    policy: pull
+  script:
+    - cid=`docker ps -a --filter='name=frontend_php-api_running' -q`
+    - if [ ! -z $cid ];then
+    - docker rm -f  $cid
+    - fi
+
+    - cid=`docker ps -a --filter='name=frontend_php-api-local_running' -q`
+    - if [ ! -z $cid ];then
+    - docker rm -f  $cid
+    - fi
+
+    - docker build -t frontend/php-api .
+
+    - DATE_STAMP=${CI_COMMIT_REF_NAME#*/}
+    - TAG_NAME=docker.ifchange.com/toc/frontend-php-api:${DATE_STAMP}
+    - docker tag frontend/php-api $TAG_NAME
+    #- docker push $TAG_NAME
+    - echo "提测镜像地址"$TAG_NAME
+    - docker run -d -p 7600:7100 --name=frontend_php-api_running frontend/php-api sh /app/start.sh
+    - echo "branch $CI_COMMIT_REF_NAME(${CI_COMMIT_SHA:0:7}) is running at http://192.168.3.39:7600"
+  environment:
+    name: development/release
+    url: http://192.168.3.39:7600
+  #when: manual
+  only:
+    - /^(release|hotfix)\/.+$/
+
+# 同步代码到svn：仅支持release|hotfix分支
+# 同步代码到SVN:
+#   stage: deploy
+#   cache:
+#     key: "$CI_COMMIT_REF_NAME"
+#     paths:
+#       - dist/
+#       - app/view/index.html
+#     policy: pull
+#   script:
+#     - git2svn -m "/fe/node/php-api" --alias 内推 --sendmail --notify
+#   only:
+#     - /^(release|hotfix)\/.+$/
+
+# 自动创建 Tag
+创建Tag:
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - autotag
+  only:
+    - master

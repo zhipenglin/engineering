@@ -1,0 +1,41 @@
+{
+  "name": "{%=name%}",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://yapi.zhinanzhen.wiki",
+  "scripts": {
+    "start": "run-scripts start",
+    "build": "cross-env CI=false run-scripts build",
+    "test": "run-scripts test"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 8",
+    "not op_mini all"
+  ],
+  "dependencies": {
+    "egg": "^2.13.0",
+    "egg-api-proxy": "^2.4.5",
+    "egg-scripts": "^2.10.0",
+    "egg-view-nunjucks": "^2.2.0",
+    "egg-virtual-static": "^2.4.5",
+    "lodash": "^4.17.11",
+    "querystring": "^0.2.0"
+  },
+  "devDependencies": {
+    "@engr/ic-scripts": "^2.0.0",
+    "@engr/ic-scripts-rewired-server": "^2.0.0",
+    "egg-api-mock": "^2.4.5",
+    "egg-bin": "^4.9.0",
+    "cross-env": "^5.2.0",
+    "node-sass": "^4.10.0",
+    "react": "^16.6.3",
+    "react-app-polyfill": "^0.1.3",
+    "react-dom": "^16.6.3",
+    "react-router-dom": "^4.3.1"
+  }
+}

@@ -1,0 +1,77 @@
+stages:
+  - check    # 项目检测
+  - build    # 线上代码打包
+  - deploy   # 构建镜像，部署到开发环境，同步到 docker hub
+
+项目规范检测:
+  stage: check
+  script:
+    - psc --alias {%=alias%} --notify
+  only:  # 只检测除 master 之外的分支提交
+    - branches
+  except:
+    - master
+
+前端代码打包:
+  stage: build
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    paths:
+      - build
+    policy: push
+  before_script:
+    - nvm use
+    - PROJECT_DEPS_DIR=~/${CI_PROJECT_PATH//\//_}_deps
+    - echo $PROJECT_DEPS_DIR
+    - mkdir -p $PROJECT_DEPS_DIR
+    - ln -sf $(pwd)/package*.json $PROJECT_DEPS_DIR/
+    - npm install --registry=http://npm.zhinanzhen.ai --prefix=$PROJECT_DEPS_DIR
+    - NODE_PATH=$PROJECT_DEPS_DIR/node_modules
+    - ln -sf $NODE_PATH node_modules
+  after_script:
+    - unset NODE_PATH PROJECT_DEPS_DIR
+  script:
+    - npm run build -- --color
+    - rm -rf src
+  only:  # 上线分支自动打包，master自动打包
+    - /^(release|hotfix)\/.+$/
+    - master
+
+部署release分支:
+  stage: deploy
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    paths:
+      - build/
+    policy: pull
+  script:
+    - cid=`docker ps -a --filter='name=frontend_{%=name%}_running' -q`
+    - if [ ! -z $cid ];then
+    - docker rm -f  $cid
+    - fi
+
+    - docker build -t frontend/{%=name%} .
+
+    - DATE_STAMP=${CI_COMMIT_REF_NAME#*/}
+    - TAG_NAME=docker.ifchange.com/toc/frontend-{%=name%}:${DATE_STAMP}
+    - docker tag frontend/{%=name%} $TAG_NAME
+    - docker push $TAG_NAME
+    - echo "提测镜像地址" [$TAG_NAME]
+    - docker run -d -p {%=port%}:7100 --name=frontend_{%=name%}_running frontend/{%=name%} sh /app/start.sh
+    - CURRENT_IP=ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | grep -v '172.17.0.1'
+    - echo "branch $CI_COMMIT_REF_NAME(${CI_COMMIT_SHA:0:7}) is running at http://$CURRENT_IP:{%=port%}"
+  environment:
+    name: development/release
+    url: http://$CURRENT_IP:{%=port%}
+  only:
+    - /^(release|hotfix)\/.+$/
+
+# 自动创建 Tag
+创建Tag:
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - autotag
+  only:
+    - master

@@ -1,0 +1,29 @@
+{
+  "name": "{%=name%}",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://yapi.zhinanzhen.wiki",
+  "scripts": {
+    "start": "run-scripts start",
+    "build": "cross-env CI=false run-scripts build",
+    "test": "run-scripts test"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 8",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@engr/ic-scripts": "^2.0.0",
+    "@engr/ic-scripts-util": "^2.0.0",
+    "cross-env": "^5.2.0",
+    "node-sass": "^4.10.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-router-dom": "^4.3.1"
+  }
+}
