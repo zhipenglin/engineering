@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-customize-config",
-  "version": "2.0.1-alpha.6",
+  "version": "2.0.1-alpha.7",
   "description": "Parsing the customize file",
   "target": "node",
   "main": "index.js",
@@ -10,7 +10,7 @@
   "author": "admin",
   "license": "ISC",
   "dependencies": {
-    "@engr/ic-scripts-util": "^2.0.1-alpha.6",
+    "@engr/ic-scripts-util": "^2.0.1-alpha.7",
     "chalk": "^2.4.1",
     "load-json-file": "^5.0.0",
     "lodash": "^4.17.10"
