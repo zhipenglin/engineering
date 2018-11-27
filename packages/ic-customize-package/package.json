@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-customize-package",
-  "version": "2.0.1-alpha.11",
+  "version": "2.0.1-alpha.12",
   "description": "分离项目中的特性到特性包中，使特性更好维护",
   "target": "node",
   "main": "index.js",
@@ -13,8 +13,8 @@
   "author": "admin",
   "license": "ISC",
   "dependencies": {
-    "@engr/ic-customize-config": "^2.0.1-alpha.11",
-    "@engr/ic-scripts-util": "^2.0.1-alpha.11",
+    "@engr/ic-customize-config": "^2.0.1-alpha.12",
+    "@engr/ic-scripts-util": "^2.0.1-alpha.12",
     "chalk": "^2.4.1",
     "fs-extra": "^7.0.0",
     "glob": "^7.1.3",
