@@ -1,11 +1,15 @@
 {
   "name": "@engr/ic-scripts-create",
-  "version": "2.0.1-alpha.9",
+  "version": "2.0.1-alpha.10",
   "description": "初始化脚手架",
   "target": "node",
   "bin": {
     "run-create": "./bin/run-create.js"
   },
+  "files": [
+    "bin",
+    "template"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
