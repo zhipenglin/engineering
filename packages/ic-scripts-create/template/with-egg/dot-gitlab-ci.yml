@@ -58,7 +58,7 @@ stages:
     - docker push $TAG_NAME
     - echo "提测镜像地址" [$TAG_NAME]
     - docker run -d -p {%=port%}:7100 --name=frontend_{%=name%}_running frontend/{%=name%} sh /app/start.sh
-    - CURRENT_IP=ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | grep -v '172.17.0.1'
+    - CURRENT_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | grep -v '172.*.0.1')
     - echo "branch $CI_COMMIT_REF_NAME(${CI_COMMIT_SHA:0:7}) is running at http://$CURRENT_IP:{%=port%}"
   environment:
     name: development/release

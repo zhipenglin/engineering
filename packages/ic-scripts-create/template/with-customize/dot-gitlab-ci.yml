@@ -1,12 +1,12 @@
 stages:
   - check    # 项目检测
   - build    # 线上代码打包
-  - deploy   # 部署到开发环境，同步到 SVN
+  - deploy   # 构建镜像，部署到开发环境，同步到 docker hub
 
 项目规范检测:
   stage: check
   script:
-    - psc --alias php-api --notify
+    - psc --alias {%=alias%} --notify
   only:  # 只检测除 master 之外的分支提交
     - branches
   except:
@@ -20,7 +20,6 @@ stages:
       - build
     policy: push
   before_script:
-#    - nvm install
     - nvm use
     - PROJECT_DEPS_DIR=~/${CI_PROJECT_PATH//\//_}_deps
     - echo $PROJECT_DEPS_DIR
@@ -33,6 +32,7 @@ stages:
     - unset NODE_PATH PROJECT_DEPS_DIR
   script:
     - npm run build -- --color
+    - export CACHE_DIR=$PROJECT_DEPS_DIR/build&&npm run cache -- --color
     - rm -rf src
   only:  # 上线分支自动打包，master自动打包
     - /^(release|hotfix)\/.+$/
@@ -46,45 +46,26 @@ stages:
       - build/
     policy: pull
   script:
-    - cid=`docker ps -a --filter='name=frontend_php-api_running' -q`
+    - cid=`docker ps -a --filter='name=frontend_{%=name%}_running' -q`
     - if [ ! -z $cid ];then
     - docker rm -f  $cid
     - fi
 
-    - cid=`docker ps -a --filter='name=frontend_php-api-local_running' -q`
-    - if [ ! -z $cid ];then
-    - docker rm -f  $cid
-    - fi
-
-    - docker build -t frontend/php-api .
+    - docker build -t frontend/{%=name%} .
 
     - DATE_STAMP=${CI_COMMIT_REF_NAME#*/}
-    - TAG_NAME=docker.ifchange.com/toc/frontend-php-api:${DATE_STAMP}
-    - docker tag frontend/php-api $TAG_NAME
-    #- docker push $TAG_NAME
-    - echo "提测镜像地址"$TAG_NAME
-    - docker run -d -p 7600:7100 --name=frontend_php-api_running frontend/php-api sh /app/start.sh
-    - echo "branch $CI_COMMIT_REF_NAME(${CI_COMMIT_SHA:0:7}) is running at http://192.168.3.39:7600"
+    - TAG_NAME=docker.ifchange.com/toc/frontend-{%=name%}:${DATE_STAMP}
+    - docker tag frontend/{%=name%} $TAG_NAME
+    - docker push $TAG_NAME
+    - echo "提测镜像地址" [$TAG_NAME]
+    - docker run -d -p {%=port%}:7100 --name=frontend_{%=name%}_running frontend/{%=name%} sh /app/start.sh
+    - CURRENT_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | grep -v '172.*.0.1')
+    - echo "branch $CI_COMMIT_REF_NAME(${CI_COMMIT_SHA:0:7}) is running at http://$CURRENT_IP:{%=port%}"
   environment:
     name: development/release
-    url: http://192.168.3.39:7600
-  #when: manual
+    url: http://$CURRENT_IP:{%=port%}
   only:
     - /^(release|hotfix)\/.+$/
-
-# 同步代码到svn：仅支持release|hotfix分支
-# 同步代码到SVN:
-#   stage: deploy
-#   cache:
-#     key: "$CI_COMMIT_REF_NAME"
-#     paths:
-#       - dist/
-#       - app/view/index.html
-#     policy: pull
-#   script:
-#     - git2svn -m "/fe/node/php-api" --alias 内推 --sendmail --notify
-#   only:
-#     - /^(release|hotfix)\/.+$/
 
 # 自动创建 Tag
 创建Tag:
