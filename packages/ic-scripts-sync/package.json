@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-scripts-sync",
-  "version": "2.0.1-alpha.14",
+  "version": "2.0.1-alpha.15",
   "description": "同步tob代码",
   "target": "node",
   "bin": {
