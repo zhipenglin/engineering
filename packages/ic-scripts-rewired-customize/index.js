@@ -6,13 +6,13 @@
 
 const {getBabelLoader, loaderNameMatches, getLoader, paths} = require("@engr/ic-scripts-util"),
     {getFeatures} = require('@engr/ic-customize-config')(),
-    rewiredPostcss=require('@engr/ic-scripts-rewired-postcss'),
     customizePlugin = require('@engr/ic-customize-loader/postcssPlugin');
 
 const createRewiredCustomize = (customizeLoaderOptions) => {
     customizeLoaderOptions = Object.assign({}, {
         test: /@p@([./])/g,
         postcssOptions: {},
+        customizePluginOptions:{},
         featureOptions: {}
     }, customizeLoaderOptions);
 
@@ -52,6 +52,7 @@ const createRewiredCustomize = (customizeLoaderOptions) => {
             if(loaderNameMatches(rule, "postcss-loader")){
                 const postcssPlugins=rule.options.plugins();
                 postcssPlugins.splice(0, 0, customizePlugin({
+                    ...customizeLoaderOptions.customizePluginOptions,
                     rules
                 }));
                 rule.options.plugins = () => postcssPlugins;

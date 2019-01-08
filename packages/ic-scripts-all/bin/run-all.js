@@ -2,8 +2,9 @@
 
 const spawn = require('cross-spawn');
 const customize = require('@engr/ic-customize-config')(), gitList = require('@engr/ic-gitlib-update-list')();
+const {parse} = require('ic-args');
 const args = process.argv.slice(2);
-const path=require('path');
+const path = require('path');
 const scriptIndex = args.findIndex(
     x => x === 'build' || x === 'eject' || x === 'start' || x === 'test'
 );
@@ -30,7 +31,7 @@ const runCommand = (commond, script, ...env) => {
 };
 
 if (script === 'build' && customize.isCustomize) {
-    require('dotenv').config({path: process.env.ENV_PATH || path.resolve(process.cwd(),'.env.local')});
+    require('dotenv').config({path: process.env.ENV_PATH || path.resolve(process.cwd(), '.env.local')});
 
     let updateList = customize.updateList || customize.all;
     if (gitList.length > 0) {
@@ -44,26 +45,23 @@ if (script === 'build' && customize.isCustomize) {
         const customize = updateList[index];
         //先同步tob分支
         //sync-tob
-        const tobBranchMapping = {
-            default: {
-                value: 'master'
+        if (process.env.TOB_BRANCH_MAPPGING) {
+            const tobBranchMapping = Object.assign({
+                default: {
+                    value: 'master'
+                }
+            }, parse(process.env.TOB_BRANCH_MAPPGING, ['value', 'isForce']));
+            const args = tobBranchMapping[customize] || tobBranchMapping['default'];
+            const syncResults = runCommand('run-sync', 'sync', `TOB_BRANCH=${args.value}`, `IS_FORCE=${args.isForce ? 'true' : 'false'}`);
+            if (syncResults.signal) {
+                return process.exit(1);
             }
-        };
-        (process.env.TOB_BRANCH_MAPPGING || '').split(',').filter((str) => {
-            const index = str.indexOf(':');
-            return index > 0 && index < str.length - 1;
-        }).forEach((str) => {
-            const [key, value, isForce] = str.split(':');
-            tobBranchMapping[key] = {
-                value, isForce
-            };
-        });
-        const args = tobBranchMapping[customize] || tobBranchMapping['default'];
-        const syncResults = runCommand('run-sync', 'sync', `TOB_BRANCH=${args.value}`, `IS_FORCE=${args.isForce ? 'true' : 'false'}`);
-        if (syncResults.signal) {
-            return process.exit(1);
         }
-        const runResults = runCommand('run-scripts', 'build', `CUSTOMIZE_TARGET=${customize}`);
+        const cdnList = parse(process.env.CDN_LIST), envList = [`CUSTOMIZE_TARGET=${customize}`];
+        if(cdnList[customize]){
+            envList.push(`PUBLIC_URL=${cdnList[customize]}`);
+        }
+        const runResults = runCommand('run-scripts', 'build', ...envList);
         if (runResults.signal) {
             return process.exit(1);
         }

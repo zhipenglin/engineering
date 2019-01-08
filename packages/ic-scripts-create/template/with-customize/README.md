@@ -2,7 +2,7 @@
 
 描述：{%=alias%}
 
-创建时间：{%=`${now.getFullYear()}年${leftPad(now.getMonth() + 1, 2, '0')}月${leftPad(now.getDate(), 2, '0')}日 ${leftPad(now.getHours(), 2, '0')}:${leftPad(now.getMinutes(), 2, '0')}`%}
+创建时间：{%=time%}
 
 -----------
 

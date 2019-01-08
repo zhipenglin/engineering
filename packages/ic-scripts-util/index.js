@@ -7,22 +7,23 @@
 const path = require('path'), paths = require('./paths');
 
 const loaderNameMatches = function (rule, loader_name) {
-    return rule && rule.loader && typeof rule.loader === 'string' &&
-        (rule.loader.indexOf(`${path.sep}${loader_name}${path.sep}`) !== -1 ||
-            rule.loader.indexOf(`@${loader_name}${path.sep}`) !== -1);
+    const hasLoader = (loader) => {
+        return loader.indexOf(`${path.sep}${loader_name}${path.sep}`) !== -1 || loader.indexOf(`@${loader_name}${path.sep}`) !== -1
+    };
+    return rule && (typeof rule === 'string' && hasLoader(rule) || rule.loader && typeof rule.loader === 'string' && hasLoader(rule.loader));
 };
 
 const babelLoaderMatcher = function (rule) {
     return loaderNameMatches(rule, 'babel-loader');
 };
 
-const getLoader = function (rules, matcher) {
+const getLoader = function (rules, matcher, parentRule) {
     let loader;
 
     rules.some(rule => {
-        return (loader = matcher(rule)
+        return (loader = matcher(rule, parentRule)
             ? rule
-            : getLoader(rule.use || rule.oneOf || (Array.isArray(rule.loader) && rule.loader) || [], matcher));
+            : getLoader(rule.use || rule.oneOf || (Array.isArray(rule.loader) && rule.loader) || [], matcher, rule));
     });
 
     return loader;

@@ -1,1 +1,1 @@
-SERVER_PORT={%=port%}
+PUBLIC_URL={%=public_path%}/${CUSTOMIZE_TARGET}

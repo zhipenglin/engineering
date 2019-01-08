@@ -1,18 +1,23 @@
 {
-  "name": "php-api",
+  "name": "{%=name%}",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
-  "proxy": "http://yapi.zhinanzhen.wiki",
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --config .prettierrc --write",
+      "git add"
+    ]
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "cross-env CI=false react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "run-scripts start",
+    "build": "cross-env CI=false run-scripts build",
+    "prettier": "prettier --config .prettierrc --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
+    "test": "run-scripts test"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -20,19 +25,19 @@
   "browserslist": [
     ">0.2%",
     "not dead",
-    "not ie <= 11",
+    "not ie <= 8",
     "not op_mini all"
   ],
   "devDependencies": {
-    "@engr/ic-scripts": "^2.0.1-alpha.0",
-    "@engr/ic-scripts-util": "^2.0.1-alpha.0",
-    "antd": "^3.10.8",
-    "babel-plugin-import": "^1.11.0",
+    "@engr/ic-scripts": "^2.0.0",
     "cross-env": "^5.2.0",
-    "ic-compose": "^1.4.16",
-    "ic-fetch-data": "^2.1.17",
-    "lodash": "^4.17.11",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.0",
     "node-sass": "^4.10.0",
+    "prettier": "^1.15.3",
+    "react": "^16.7.0",
+    "react-app-polyfill": "^0.1.3",
+    "react-dom": "^16.7.0",
     "react-router-dom": "^4.3.1"
   }
 }

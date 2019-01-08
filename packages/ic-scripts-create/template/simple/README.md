@@ -1,31 +1,25 @@
-## ic-scripts-create
+## {%=name%}
 
-描述：初始化脚手架
+描述：{%=alias%}
 
-创建人：admin
-
-创建时间：2018年11月13日 15:27
-
-仓库地址: git@gitlab.zhinanzhen.wiki:frontend/common/engineering.git
-
-[gitlab](http://gitlab.zhinanzhen.wiki/frontend/common/engineering)
+创建时间：{%=time%}
 
 -----------
 
-### 参数描述
+### 快速开始
 
-| 参数名 | 类型 | 是否必须 | 说明 | 默认值 |
-| --- | --- | ---- | --- | --- |
-|     |     |      |     |     |
+```
+npm start
+```
 
-### API描述
+打开 [http://localhost:{%=port%}/](http://localhost:{%=port%}/) 可以看到应用
 
-| 名称  | 参数列表 | 返回值 | 功能说明 |
-| --- | ---- | --- | ---- |
-|     |      |     |      |
+### 部署上线
 
------------
+1. 将项目push到gitlab仓库
 
-### Blog:
+2. 创建release分支
 
-- 2018年11月13日 15:27：**admin** 创建组件
+3. 确认开发机环境项目启动无误
+
+4. 提交给测试走上线流程

@@ -28,7 +28,8 @@ module.exports = appInfo => {
     config.apiProxy = {
         forward: {
             renderView: async (ctx) => {
-                await ctx.render('/index',{});
+                //这里根据定制名称找入口文件需要自己实现逻辑，默认为common
+                await ctx.render('/common/index',{});
             }
         }
     };
@@ -46,7 +47,7 @@ module.exports = appInfo => {
 
     // 静态资源配置
     config.static = {
-        prefix: `/`,
+        prefix: `{%=public_path%}/`,
         dir: path.join(appInfo.baseDir, 'build/'),
     };
 

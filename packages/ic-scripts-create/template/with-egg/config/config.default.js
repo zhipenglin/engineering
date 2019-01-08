@@ -1,7 +1,7 @@
 const path=require('path');
 module.exports = appInfo => {
     const config = {};
-    config.keys = appInfo.name + '_1511788532548_5403';
+    config.keys = appInfo.name + '{%=`_${parseInt(Math.random()*Math.pow(10,13))}_${parseInt(Math.random()*Math.pow(10,4))}`%}';
 
     config.httpclient = {
         request: {
@@ -37,7 +37,7 @@ module.exports = appInfo => {
     config.view = {
         // 模板变量
         locals: {
-            siteTitle: '内推'
+            siteTitle: '{%=alias%}'
         },
         defaultViewEngine: 'nunjucks',
         defaultExtension: '.html',
@@ -46,7 +46,7 @@ module.exports = appInfo => {
 
     // 静态资源配置
     config.static = {
-        prefix: `/`,
+        prefix: `{%=public_path%}/`,
         dir: path.join(appInfo.baseDir, 'build/'),
     };
 
