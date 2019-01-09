@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-scripts-create",
-  "version": "2.0.1-alpha.23",
+  "version": "2.0.1-alpha.24",
   "description": "初始化脚手架",
   "target": "node",
   "bin": {
@@ -8,7 +8,9 @@
   },
   "files": [
     "bin",
-    "template"
+    "template",
+    "scripts",
+    "lib"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
