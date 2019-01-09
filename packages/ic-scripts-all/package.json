@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-scripts-all",
-  "version": "2.0.1-alpha.24",
+  "version": "2.0.1-alpha.25",
   "description": "提供全部打包命令",
   "target": "node",
   "bin": {
@@ -12,8 +12,8 @@
   "author": "admin",
   "license": "ISC",
   "dependencies": {
-    "@engr/ic-customize-config": "^2.0.1-alpha.24",
-    "@engr/ic-gitlib-update-list": "^2.0.1-alpha.24",
+    "@engr/ic-customize-config": "^2.0.1-alpha.25",
+    "@engr/ic-gitlib-update-list": "^2.0.1-alpha.25",
     "cross-env": "^5.2.0",
     "dotenv": "^6.1.0",
     "ic-args": "^2.1.21"
