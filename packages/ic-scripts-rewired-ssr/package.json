@@ -1,7 +1,7 @@
 {
-  "name": "@engr/ic-scripts-rewired-sass",
+  "name": "@engr/ic-scripts-rewired-ssr",
   "version": "2.0.1-alpha.27",
-  "description": "Configure SASS in Create React App without ejecting",
+  "description": "添加服务器端渲染支持",
   "target": "node",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@engr/ic-scripts-util": "^2.0.1-alpha.27",
-    "node-sass": "^4.9.2",
-    "sass-loader": "^7.0.3"
+    "chalk": "^2.4.2",
+    "webpack-node-externals": "^1.7.2"
   }
 }
