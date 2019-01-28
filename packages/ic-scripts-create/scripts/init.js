@@ -4,7 +4,7 @@ const inquirer = require('inquirer'),
     chalk = require('chalk'),
     path = require('path'),
     leftPad = require('left-pad'),
-    glob = require('glob'),
+    globPromise = require('../lib/globPromise'),
     _ = require('lodash'),
     fs = require('fs-extra'),
     getTemplatePath = require('../lib/getTemplatePath'),
@@ -87,16 +87,6 @@ const getInfo = (projectName) => {
         }
     ]);
 };
-const globPromise = (...args) => {
-    return new Promise((resolve, reject) => {
-        glob(...args, (err, files) => {
-            if (err) {
-                return reject(err);
-            }
-            resolve(files);
-        });
-    });
-};
 
 module.exports = async (projectName) => {
     const currentPath = fs.realpathSync(process.cwd()),
@@ -169,10 +159,11 @@ module.exports = async (projectName) => {
         if (/^\.(html|htm|json|conf|md|sh|js|jsx|css|scss|sass|less|yml)$/.test(path.extname(templateItemPath)) || /^\.env/.test(filename) || filename === 'Dockerfile') {
             try {
                 const compile = _.template(await fs.readFile(item, 'utf8'));
+                const removeEncode=(str='')=>str.replace(/\{\\%/g,'{%').replace(/%\\}/g,'%}');
 
-                await fs.writeFile(filePath, compile({name, public_path, alias, port, template, date, time}));
+                await fs.writeFile(filePath, removeEncode(compile({name, public_path, alias, port, template, date, time})));
             } catch (e) {
-                console.log(e);
+                console.error(e);
                 throw new Error('template compilation failed. Check that the template syntax is correct');
             }
         } else {

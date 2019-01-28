@@ -23,6 +23,9 @@ const ls = async () => {
     const packagesListPath = path.resolve(__dirname, '../.packages/');
     if (await fs.pathExists(packagesListPath)) {
         const list = await fs.readdir(packagesListPath);
+        if(list.length===0){
+            return console.log(chalk.red('The template list is empty'));
+        }
         const templateName = await inquirer.prompt([{
             type: 'list',
             name: 'template',
@@ -48,7 +51,7 @@ const ls = async () => {
         console.log(`removing template ${chalk.cyan(templateName.replace('%2f', '/'))} ...`);
         await fs.remove(path.join(packagesListPath, templateName));
         console.log(chalk.green('delete successful'));
-        ls();
+        await ls();
     } else {
         console.log(chalk.red('The template list is empty'));
     }
@@ -62,7 +65,7 @@ const ls = async () => {
     try {
         const packagePath = await downloadTemplateFromNpm(templateName);
         console.log(chalk.green(`add ${chalk.cyan(path.relative(packagesListPath, packagePath).replace('%2f', '/'))} success!`));
-        ls();
+        await ls();
     } catch (e) {
         console.log(chalk.red(e.message));
     }

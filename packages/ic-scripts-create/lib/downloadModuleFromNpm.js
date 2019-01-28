@@ -7,10 +7,10 @@ const path = require('path'),
 
 module.exports = async (template) => {
     const {name: packageName, version: packageVersion} = parsePackageName(template);
-    const tarball = await getTarball({name: packageName, version: packageVersion}),
-        packagesPath = path.resolve(__dirname, `../.packages/${packageName.replace(/\//g, '%2f')}@${latest}`),
-        templatePath = path.resolve(packagesPath, './template');
-    if (!await fs.pathExists(templatePath)) {
+    const {tarball, latest, registry} = await getTarball({name: packageName, version: packageVersion}),
+        packagesPath = path.resolve(__dirname, `../.modules/${packageName.replace(/\//g, '%2f')}@${latest}`),
+        modulesPath = path.resolve(packagesPath, './module');
+    if (!await fs.pathExists(modulesPath)) {
         if (!tarball) {
             throw new Error(`package ${packageName}@${latest} do not exist in the registry ${registry}`);
         }
@@ -19,9 +19,9 @@ module.exports = async (template) => {
 
         await fs.emptyDir(packagesPath);
         await extractStream(stream, packagesPath);
-        if (!await fs.pathExists(templatePath)) {
+        if (!await fs.pathExists(modulesPath)) {
             await fs.remove(packagesPath);
-            throw new Error(`template  does not exist in the package ${packageName}@${latest}`);
+            throw new Error(`module  does not exist in the package ${packageName}@${latest}`);
         }
     }
     return packagesPath;

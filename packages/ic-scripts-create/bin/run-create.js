@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const init = require('../scripts/init'),
     template = require('../scripts/template'),
+    apply = require('../scripts/apply'),
     chalk = require('chalk');
 
 const argv = require('yargs')
@@ -31,6 +32,22 @@ const argv = require('yargs')
         })
     }, ({options}) => {
         template(options).catch((e) => {
+            console.log(chalk.red(e));
+        });
+    })
+    .command('apply [options]', 'Apply prefabricated parts to current projects', (yargs) => {
+        yargs.positional('options', {
+            describe: `Apply operating options,For example:\n
+            ${chalk.cyan('run-create apply')} ${chalk.green('use')} - Add prefabricated parts to current projects\n
+            ${chalk.cyan('run-create apply')} ${chalk.green('ls')} - Display prefabricated parts list\n
+            ${chalk.cyan('run-create apply')} ${chalk.green('rm')} - Delete prefabricated parts from list\n
+            ${chalk.cyan('run-create apply')} ${chalk.green('add')} - Add a prefabricated parts to list.\n`,
+            choices: ['use', 'ls', 'rm', 'add'],
+            default: 'use',
+            type: 'string'
+        })
+    }, ({options}) => {
+        apply(options).catch((e) => {
             console.log(chalk.red(e));
         });
     })
