@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-scripts-rewired-sass-resources",
-  "version": "2.1.0",
+  "version": "2.5.0",
   "description": "给scss加上style-resources-loader",
   "target": "node",
   "main": "index.js",
@@ -10,7 +10,7 @@
   "author": "admin",
   "license": "ISC",
   "dependencies": {
-    "@engr/ic-scripts-util": "^2.1.0",
+    "@engr/ic-scripts-util": "^2.5.0",
     "style-resources-loader": "^1.2.1"
   }
 }

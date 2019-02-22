@@ -53,16 +53,16 @@ if (script === 'build' && customize.isCustomize) {
             }, parse(process.env.TOB_BRANCH_MAPPGING, ['value', 'isForce']));
             const args = tobBranchMapping[customize] || tobBranchMapping['default'];
             const syncResults = runCommand('run-sync', 'sync', `TOB_BRANCH=${args.value}`, `IS_FORCE=${args.isForce ? 'true' : 'false'}`);
-            if (syncResults.signal) {
+            if (syncResults.signal || syncResults.status === 1) {
                 return process.exit(1);
             }
         }
         const cdnList = parse(process.env.CDN_LIST), envList = [`CUSTOMIZE_TARGET=${customize}`];
-        if(cdnList[customize]){
+        if (cdnList[customize]) {
             envList.push(`PUBLIC_URL=${cdnList[customize]}`);
         }
         const runResults = runCommand('run-scripts', 'build', ...envList);
-        if (runResults.signal) {
+        if (runResults.signal || runResults.status === 1) {
             return process.exit(1);
         }
     }

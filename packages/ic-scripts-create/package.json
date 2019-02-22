@@ -1,6 +1,6 @@
 {
   "name": "@engr/ic-scripts-create",
-  "version": "2.1.0",
+  "version": "2.5.0",
   "description": "初始化脚手架",
   "target": "node",
   "bin": {

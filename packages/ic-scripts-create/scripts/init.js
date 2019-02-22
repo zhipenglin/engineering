@@ -181,7 +181,7 @@ module.exports = async (projectName) => {
         child.on('close', (code) => {
             if (code !== 0) {
                 reject({
-                    command: `${command} ${args.join(' ')}`,
+                    command: `npm install error`,
                 });
                 return;
             }

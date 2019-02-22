@@ -103,8 +103,13 @@ checkBrowsers(paths.appPath, isInteractive)
             }
 
             console.log('File sizes after gzip:\n');
+            //这里，如果加入服务器端渲染插件，这里会报错，兼容一下
+            let outputStats=stats;
+            if(stats.constructor.name==='MultiStats'){
+                outputStats=stats.stats[0];
+            }
             printFileSizesAfterBuild(
-                stats,
+                outputStats,
                 previousFileSizes,
                 appBuild,
                 WARN_AFTER_BUNDLE_GZIP_SIZE,
@@ -114,7 +119,14 @@ checkBrowsers(paths.appPath, isInteractive)
 
             const appPackage = require(paths.appPackageJson);
             const publicUrl = paths.publicUrl;
-            const publicPath = config.output.publicPath;
+
+            //const publicPath = config.output.publicPath;
+            let currentConfig = config;
+            if (Array.isArray(config)) {
+                currentConfig = config.find((item) => item.target === 'web') || config[0];
+            }
+            const publicPath = currentConfig.output.publicPath;
+            //这里，如果加入服务器端渲染插件，这里会报错，兼容一下
             const buildFolder = path.relative(process.cwd(), appBuild);
             printHostingInstructions(
                 appPackage,
@@ -132,7 +144,7 @@ checkBrowsers(paths.appPath, isInteractive)
     )
     .catch(err => {
         if (err && err.message) {
-            console.log(err.message);
+            console.log(chalk.red(err.message));
         }
         process.exit(1);
     });

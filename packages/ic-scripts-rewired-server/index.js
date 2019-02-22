@@ -14,7 +14,7 @@ function createRewiredServer(serverOptions = {startCommand: 'egg-bin dev'}) {
             //检查端口号，如果被占用，自动切到其他端口
             const results = spawn.sync('node', [require.resolve('./lib/getPort.js')]);
             if (results.status === 0) {
-                const realPort = results.stdout.toString();
+                const realPort = results.stdout.toString().trim();
                 process.env.PORT = realPort;
             }
             const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
@@ -22,7 +22,7 @@ function createRewiredServer(serverOptions = {startCommand: 'egg-bin dev'}) {
             event.on('webpack-start-complete', () => {
                 const serverPort = process.env.SERVER_PORT || 7001;
                 const list = serverOptions.startCommand.split(' ').filter((command) => !!command),
-                    child = spawn('cross-env', [`STATIC_PORT=${process.env.PORT} CUSTOMIZE_TARGET=${process.env.CUSTOMIZE_TARGET}`, ...list]);
+                    child = spawn('cross-env', [`STATIC_PORT=${process.env.PORT}`, `CUSTOMIZE_TARGET=${process.env.CUSTOMIZE_TARGET}`, ...list]);
                 child.stdout.on('data', (data) => {
                     const stdout = data.toString();
                     console.log(stdout);

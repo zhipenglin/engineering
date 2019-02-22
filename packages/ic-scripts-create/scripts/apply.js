@@ -1,4 +1,6 @@
 const fs = require('fs-extra'),
+    spawn = require('cross-spawn'),
+    semver = require('semver'),
     validateNpm = require('validate-npm-package-name'),
     parsePackageName = require('../lib/parsePackageName'),
     downloadModuleFromNpm = require('../lib/downloadModuleFromNpm'),
@@ -6,6 +8,7 @@ const fs = require('fs-extra'),
     path = require('path'),
     _ = require('lodash'),
     inquirer = require('inquirer'),
+    loadJson = require('load-json-file'),
     chalk = require('chalk');
 
 _.templateSettings.interpolate = /{%=([\s\S]+?)%}/g;
@@ -114,7 +117,8 @@ const ls = async () => {
 
     const {name} = parsePackageName(moduleName),
         modulePath = path.resolve(packagesListPath, `${moduleName}/module`),
-        inquirerFilePath = path.resolve(packagesListPath, `${moduleName}/inquirer.js`);
+        inquirerFilePath = path.resolve(packagesListPath, `${moduleName}/inquirer.js`),
+        packagePath = path.resolve(packagesListPath, `${moduleName}/package.json`);
 
     let customInquirer = [];
     if (await fs.pathExists(inquirerFilePath)) {
@@ -141,7 +145,7 @@ const ls = async () => {
         const filename = path.basename(item),
             filePath = path.resolve(targetModulePath, path.relative(modulePath, item));
         await fs.ensureDir(path.dirname(filePath));
-        if (/^\.(html|htm|json|conf|md|sh|js|jsx|css|scss|sass|less|yml)$/.test(path.extname(item))) {
+        if (/^\.(html|htm|json|conf|md|sh|js|jsx|css|scss|sass|less|yml|wxml|wxss)$/.test(path.extname(item))) {
             try {
                 const compile = _.template(await fs.readFile(item, 'utf8'));
                 await fs.writeFile(filePath, compile({...props}));
@@ -153,6 +157,43 @@ const ls = async () => {
             await fs.copy(item, filePath);
         }
     }));
+    //检查依赖，自动安装
+    const {dependencies} = await loadJson(packagePath),
+        nameList = dependencies && Object.keys(dependencies);
+
+    if (nameList && nameList.length > 0) {
+        //检查包兼容性
+        console.log('Check module dependency compatibility.');
+        await Promise.all(nameList.map(async (name) => {
+            const modulePackagePath = path.resolve(currentPath, 'node_modules', name, 'package.json');
+            if (await fs.exists(modulePackagePath)) {
+                const {version} = await loadJson(modulePackagePath);
+                nameList.splice(nameList.indexOf(name), 1);
+                if (!semver.satisfies(version, dependencies[name])) {
+                    console.log(chalk.yellow(`Module ${name}${chalk.cyan(`[current:${name}@${version},module need ${name}@${dependencies[name]}]`)} dependencies are incompatible with the current project installation version,Please install it manually by yourself.`));
+                }
+            }
+        }));
+        if (nameList.length > 0) {
+            console.log('Installation module dependency package. This might take a couple of minutes.');
+            await new Promise((resolve, reject) => {
+                const child = spawn('npm', ['install', '--save-dev', nameList.map((name) => `${name}@${dependencies[name]}`).join(' '), '--loglevel', 'error'], {
+                    stdio: 'inherit',
+                    cwd: currentPath
+                });
+                child.on('close', (code) => {
+                    if (code !== 0) {
+                        reject({
+                            command: `npm install error`,
+                        });
+                        return;
+                    }
+                    resolve();
+                });
+            });
+        }
+    }
+    console.log(`Success! Applied ${targetModuleName} at ${chalk.green(targetPath)}`);
 };
 
 module.exports = async (option) => {
