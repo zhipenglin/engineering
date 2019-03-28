@@ -7,7 +7,10 @@ const mergeConfig = require('./mergeConfig'),
     fs = require('fs'),
     chalk = require('chalk'),
     {paths, getBabelLoader} = require('@engr/ic-scripts-util'),
-    LoadablePlugin = require('@loadable/webpack-plugin'),WritePlugin=require('write-file-webpack-plugin')
+    rewiredRoute = require('@engr/ic-scripts-rewired-route-loadable'),
+    LoadablePlugin = require('@loadable/webpack-plugin'),
+    WritePlugin = require('write-file-webpack-plugin'),
+    CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const createRewiredSSR = () => {
     return (config, env) => {
@@ -21,13 +24,18 @@ const createRewiredSSR = () => {
             htmlWebpackPlugin && (htmlWebpackPlugin.options.inject = false);
 
             const webpackConfig = require('./config/webpack.config');
-            const serverConfig = mergeConfig(webpackConfig, config, env);
-            if(env==='development'){
+            let serverConfig = mergeConfig(webpackConfig, config, env);
+
+            config = rewiredRoute()(config, env);
+            serverConfig = rewiredRoute({isServer: true})(serverConfig, env);
+            if (env === 'development') {
                 serverConfig.plugins.push(new WritePlugin());
+                serverConfig.plugins.push(new CleanWebpackPlugin());
             }
             outputConfig.push(serverConfig);
             return outputConfig;
         } else {
+            config = rewiredRoute()(config, env);
             console.log(chalk.red(`SSR cannot be turned on now,make sure the file ${paths.appServerIndexJs} exists.`));
         }
         return config;

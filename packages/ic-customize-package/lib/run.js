@@ -32,12 +32,12 @@ const pack = async (name) => {
 
     let files = [];
     for (let index = 0; index < filesArray.length; index++) {
-        const target = filesArray[index], stats = await fs.stat(target);
-        if (stats && stats.isDirectory()) {
-            files = files.concat(await globPromise(path.join(target, '/**/*'), {nodir: true}));
-        } else {
-            files.push(target);
-        }
+            const target = filesArray[index], stats = await fs.stat(target);
+            if (stats && stats.isDirectory()) {
+                files = files.concat(await globPromise(path.join(target, '/**/*'), {nodir: true}));
+            } else {
+                files.push(target);
+            }
     }
 
     console.log(chalk.cyan(`共查找到${files.length}个特性文件`));

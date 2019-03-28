@@ -4,7 +4,7 @@ const {getLoader, getBabelLoader, loaderNameMatches} = require("@engr/ic-scripts
     get = require('lodash/get'), path = require('path');
 
 module.exports = (target, config) => {
-    let index=0;
+    let index = 0;
     getLoader(config.module.rules, (rule, parentRule) => {
         if (loaderNameMatches(rule, "babel-loader")) {
             let currentRule = rule;
